@@ -4,6 +4,16 @@ function setCatID(id) {
    localStorage.setItem("catID", id);
    window.location = "product-info.html"
 }
+
+function titulo(items){
+    let htmlContentToAppend = "";
+    htmlContentToAppend += `
+        <h2>Productos</h2>
+        <p class="lead">Verás aquí todas los productos de categoria <strong>${items.catName}</strong>.</p>
+    `;
+     document.getElementById("containerTitulo").innerHTML = htmlContentToAppend;
+}
+
 function showCategoriesList(items){
     let htmlContentToAppend = "";
     for(const products of items){
@@ -22,18 +32,15 @@ function showCategoriesList(items){
                     </div>
                 </div>
             </div>
-            `
-        
-
+            `;
         document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
     }
 }
 //Primero creamos el fetch y la variable data_url asociada a éste
 async function fetchData(){
     const response = await fetch(data_url);
-    // console.log(data_url);
     const data = await response.json();
     showCategoriesList(data.products);
-    // console.log(data.products)
+    titulo(data);
 }
 fetchData();
