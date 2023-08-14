@@ -192,3 +192,39 @@ a.custom-card:hover {
 #parra {
   color: red;
 }
+
+
+#containerlogin {
+ /*margin-left: 45rem;
+ 
+ margin-right: 50rem; 
+ padding-left: 5rem;
+ padding-top: 5rem;
+ padding-bottom: 5rem;
+ border-radius: 20px;
+ text-align: center;*/
+ width: 450px; 
+ height: 300px;
+ margin-left: 40rem;
+ margin-top: 15rem;
+ position: absolute;
+ background-color: #fd7e14;
+display:grid;
+  justify-content: center; 
+  padding-bottom: 15px;
+  padding-top: 15px;
+  border: solid  #ffc107;
+  border-radius: 20px;
+  box-shadow:  5px 4px 10px  #94989b;
+  color: rgb(78, 4, 4);
+}
+
+.form-control:hover {
+  box-shadow:  5px 4px 10px  rgb(78, 4, 4);
+  zoom: 1.05;
+}
+#containerlogin:hover {
+  box-shadow:  10px 5px 10px  rgb(78, 4, 4);
+  border: solid  #79757569;
+}
+
