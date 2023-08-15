@@ -1,72 +1,76 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <title>eMercado - Todo lo que busques está aquí</title>
 
-    <link
-      href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
-      rel="stylesheet"
-    />
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/styles.css" rel="stylesheet" />
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>eMercado - Todo lo que busques está aquí</title>
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
 
-    <style>
-      body {
-        background-color: rgb(248, 249, 250);
-      }
-    </style>
-  </head>
+<body class="text-center" style="background-image:url(./img/background-index.png) ;">
+  <main class="mt-5">
+    <div class="container">
 
-  <body>
-    <div id="alertas"></div>
-
-    <main class="mt-5">
-      <div id="containerlogin" class="containerloginn">
-        <!--Inicio-->
-        <h2>Inicio de sesión</h2>
-        <div>
-          <label for="usuario" class="form-label">Usuario</label>
-          <input required type="text" class="form-control" id="usuario" />
+      <div class="login-container row">
+        <div class="col col1">
+          <img src="img/login-logo.png" alt="" class="cover-img2">
         </div>
-        <div>
-          <label for="password1" class="form-label">Contraseña</label>
-          <input required type="password" class="form-control" id="password" />
+
+        <div class="col col2">
+          <img src="img/login-img.png" alt="" class="cover-img3">
+          <p>Inicia sesion</p>
+
+          <div class="input-container">
+            <input type="email" name="correo" id="email" class="login-input" placeholder="Correo electronico">
+            <div class="circulo">
+              <img src="img/mail.png" alt="" class="login-icon">
+            </div>
+          </div>
+
+          <div class="input-container">
+            <input type="password" name="password" id="password" class="login-input" placeholder="Contrasena">
+            <div class="circulo">
+              <img src="img/password.png" alt="" class="login-icon">
+            </div>
+          </div>
+
+          <input type="submit" value="Inicia sesion" class="login-submit" id="boton-iniciar-sesion">
         </div>
-        <div id="rec">
-          <input
-            required
-            type="checkbox"
-            class="form-check-input"
-            id="terminos"
-          />
-          <label class="form-check-label" for="terminos">Recordar</label>
-          <p><a href="#">¿Olvidaste tu contraseña?</a></p>
-        </div>
-        <button class="btn btn-primary" type="button" id="ingBtn">
-          Ingresar
-        </button>
       </div>
-    </main>
-    <footer class="text-muted">
-      <div class="container">
-        <p class="float-end">
-          <a href="#">Volver arriba</a>
-        </p>
-        <p>
-          Este sitio forma parte de
-          <a href="https://jovenesaprogramar.edu.uy/" target="_blank"
-            >Jovenes a Programar</a
-          >
-        </p>
+
+      <!-- Alerts -->
+      <div class="alert alert-success alert-dismissible fade" role="alert" id="alert-success">
+        <p>Se ingreso correctamente</p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
-    </footer>
-    <body></body>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/login.js"></script>
-  </body>
+
+      <div class="alert alert-danger alert-dismissible fade" role="alert" id="alert-danger">
+        <p>Complete los datos para iniciar sesion</p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+      <div class="alert alert-danger alert-dismissible fade" role="alert" id="alert-email-danger">
+        <p>Debe ingresar un correo valido</p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+
+
+
+    </div>
+  </main>
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-end">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+    </div>
+  </footer>
+  <script src="js/login.js"></script>
+</body>
+
 </html>
