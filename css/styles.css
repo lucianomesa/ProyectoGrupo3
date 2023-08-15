@@ -5,6 +5,10 @@
   font-family: 'Verdana', serif !important;
 }
 
+#index{
+  background-image: url(/img/background-login.png);
+}
+
 .jumbotron .display-4 {
   font-weight: bold;
 }
@@ -223,9 +227,6 @@ a.custom-card:hover {
   margin-bottom: 5vw;
 }
 
-.cover-container {
-  background-color: #f8f9fa;
-}
 
 .col1 {
   display: flex;
@@ -284,4 +285,14 @@ height: 75vh;
 
 .login-icon {
   width: 50%;
+}
+#navbar{
+  background-color: #eba63e;
+}
+.nav-link {
+  color: #fdf4e7;
+}
+
+.nav-link:hover{
+  color: black;
 }
