@@ -12,7 +12,7 @@ boton.addEventListener("click", function() {
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>`;
     const loggedInUser = usuario.value; // Asignar el valor del usuario a loggedInUser
-    sessionStorage.setItem("loggedInUser", loggedInUser); //utiliza el almacenamiento local
+    localStorage.setItem("loggedInUser", loggedInUser); //utiliza el almacenamiento local
      //(localStorage) para guardar el nombre de usuario del usuario que ha iniciado sesión
     window.location.href = "index.html"; // Redirigir después de guardar el usuario
   } else {
