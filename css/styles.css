@@ -2,7 +2,7 @@
 .card-body,
 .container,
 .site-header {
-  font-family: 'Verdana', serif !important;
+  font-family: "Verdana", serif !important;
 }
 
 .jumbotron .display-4 {
@@ -32,8 +32,8 @@ nav a {
   height: 50vh;
   padding: 5em inherit;
   margin-bottom: 0;
-  background-color: #53C0FB;
-  background: url('../img/cover_back.png');
+  background-color: #53c0fb;
+  background: url("../img/cover_back.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -73,12 +73,12 @@ footer {
 }
 
 footer p {
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .site-header a {
   color: white;
-  transition: ease-in-out color .15s;
+  transition: ease-in-out color 0.15s;
 }
 
 .site-header .dropdown-menu a {
@@ -86,7 +86,7 @@ footer p {
 }
 
 .dropzone {
-  border: 2px dashed #0087F7;
+  border: 2px dashed #0087f7;
   border-radius: 5px;
   background: white;
 }
@@ -189,42 +189,58 @@ a.custom-card:hover {
   color: orange;
 }
 
-#parra {
-  color: red;
+.alert {
+  display: flex;
+  justify-content: space-between;
 }
 
+#alertas {
+  top: 80px;
+  width: 50%;
+  left: 50%;
+  margin-bottom: 200px;
+}
 
 #containerlogin {
- /*margin-left: 45rem;
- 
- margin-right: 50rem; 
- padding-left: 5rem;
- padding-top: 5rem;
- padding-bottom: 5rem;
- border-radius: 20px;
- text-align: center;*/
- width: 450px; 
- height: 300px;
- margin-left: 40rem;
- margin-top: 15rem;
- position: absolute;
- background-color: #fd7e14;
-display:grid;
-  justify-content: center; 
-  padding-bottom: 15px;
-  padding-top: 15px;
-  border: solid  #ffc107;
-  border-radius: 20px;
-  box-shadow:  5px 4px 10px  #94989b;
+  width: 400px;
+  height: 340px;
+  margin: auto;
+  margin-top: 150px;
+  background-color: #fd7e14;
+  padding: 20px 30px;
+  box-shadow: 7px 13px 37px;
+  border-top: 4px solid #ffc107;
+  border-radius: 15px;
   color: rgb(78, 4, 4);
 }
 
+#containerlogin h2 {
+  margin: 0;
+  text-align: center;
+  height: 40px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid;
+}
+
+#ingBtn {
+  width: 100%;
+  height: 40px;
+}
+
+#rec {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
 .form-control:hover {
-  box-shadow:  5px 4px 10px  rgb(78, 4, 4);
+  box-shadow: 5px 4px 10px rgb(78, 4, 4);
   zoom: 1.05;
 }
 #containerlogin:hover {
-  box-shadow:  10px 5px 10px  rgb(78, 4, 4);
-  border: solid  #79757569;
+  box-shadow: 10px 5px 10px rgb(78, 4, 4);
 }
 
+#containerlogin div {
+  margin: 5px;
+}
