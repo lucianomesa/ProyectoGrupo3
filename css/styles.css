@@ -285,3 +285,15 @@ height: 75vh;
 .login-icon {
   width: 50%;
 }
+
+#navbar{
+  background-color: #eba63e;
+}
+
+.nav-link{
+  color: #fdf4e7;
+}
+
+.nav-link:hover{
+  color: black;
+}
