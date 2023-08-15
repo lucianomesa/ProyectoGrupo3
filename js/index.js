@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function(){
     const loggedInUser = sessionStorage.getItem("loggedInUser"); //Toma el valor del login
 
@@ -16,10 +17,4 @@ document.addEventListener("DOMContentLoaded", function(){
         localStorage.setItem("catID", 103);
         window.location = "products.html"
     });
-
-    console.log(sessionStorage);
-    if(!sessionStorage.datos) {
-        alert('Inicia sesion para continuar');
-        location.href = "login.html";
-    };
 });
