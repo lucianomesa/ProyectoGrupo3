@@ -1,10 +1,4 @@
-
 document.addEventListener("DOMContentLoaded", function(){
-    const loggedInUser = localStorage.getItem("loggedInUser"); //Toma el valor del login
-
-    if (!loggedInUser) { //verifica si fue logeado
-      window.location.href = "login.html"; // Redirigir al usuario a la página de inicio de sesión
-    }
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
         window.location = "products.html"
@@ -17,4 +11,10 @@ document.addEventListener("DOMContentLoaded", function(){
         localStorage.setItem("catID", 103);
         window.location = "products.html"
     });
+
+    console.log(sessionStorage);
+    if(!sessionStorage.datos) {
+        alert('Inicia sesion para continuar');
+        location.href = "login.html";
+    };
 });
