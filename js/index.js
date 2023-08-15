@@ -1,6 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", function(){
-    const loggedInUser = localStorage.getItem("loggedInUser"); //Toma el valor del login
+    const loggedInUser = sessionStorage.getItem("loggedInUser"); //Toma el valor del login
 
     if (!loggedInUser) { //verifica si fue logeado
       window.location.href = "login.html"; // Redirigir al usuario a la página de inicio de sesión
