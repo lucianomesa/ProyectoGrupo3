@@ -299,4 +299,9 @@ height: 75vh;
 
 #bton {
   background-color: #eba63e;
+  color: #fdf4e7;
+}
+
+#bton:hover {
+  color: black;
 }
