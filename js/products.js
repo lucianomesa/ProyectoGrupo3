@@ -1,22 +1,49 @@
 //URL que contiene los datos
 const URL = "https://japceibal.github.io/emercado-api/cats_products/" + localStorage.getItem("catID") + ".json";
-
+const storedData = JSON.parse(sessionStorage.datos);
 //Variable creada para contener el div 'list-container'
 const listContainer = document.getElementsByClassName('list-container');
 
+let btnMinMax= document.getElementById("minMax")
+let btnMaxMin= document.getElementById("maxMin")
+let btnRelevancia= document.getElementById("btnRelevancia")
+let buscador= document.getElementById("buscador")
 //Funcion que hace el fetch de la url
 async function getJsonData(url) {
     const response = await fetch(url);
     const data = await response.json();
     showData(data.products);
-    
-};
-
+    btnMinMax.addEventListener("click", function(){
+        listContainer[0].innerHTML=""
+        data.products.sort((a, b)=> a.cost - b.cost);
+        showData(data.products)
+    });
+    btnMaxMin.addEventListener("click", function(){
+    listContainer[0].innerHTML=""
+    data.products.sort((aa, bb) => bb.cost - aa.cost);
+    showData(data.products)
+    });
+btnRelevancia.addEventListener("click", function(){
+listContainer[0].innerHTML=""
+data.products.sort((aaa, bbb) => bbb.soldCount - aaa.soldCount);
+showData(data.products)
+    });
+    buscador.addEventListener("input", function(e) {
+        listContainer[0].innerHTML=""
+        let terminoBusqueda = e.target.value.toLowerCase();
+        let productosFiltrados = data.products.filter(producto => {
+            return producto.name.toLowerCase().includes(terminoBusqueda);
+           
+          });
+    showData(productosFiltrados)
+});
+}
 getJsonData(URL)
 
 //Funcion que muestra los datos
 function showData(dataArray) {
-    for(const item of dataArray) {
+    for(const item of dataArray){
+    
         listContainer[0].innerHTML += `
         <div  class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
@@ -37,8 +64,20 @@ function showData(dataArray) {
 }
 function userNavbar(){
     let usuario = document.getElementById("productsUser");
-    const storedData = JSON.parse(sessionStorage.datos);
     usuario.innerHTML += 
     `<a class="nav-link" href="index.html">${storedData.email}</a>`
 }
 userNavbar()
+
+
+// const productos=[];
+// function buscarPrecios(){
+//     for (let index = 0; index < data.products.length; index++) {
+//         const element = array[index];
+        
+//     }
+// }
+
+
+    
+
