@@ -1,5 +1,5 @@
 //URL que contiene los datos
-const URL = 'https://japceibal.github.io/emercado-api/cats_products/101.json';
+const URL = "https://japceibal.github.io/emercado-api/cats_products/" + localStorage.getItem("catID") + ".json";
 
 //Variable creada para contener el div 'list-container'
 const listContainer = document.getElementsByClassName('list-container');
@@ -9,6 +9,7 @@ async function getJsonData(url) {
     const response = await fetch(url);
     const data = await response.json();
     showData(data.products);
+    
 };
 
 getJsonData(URL)
@@ -34,3 +35,10 @@ function showData(dataArray) {
         `;
     }
 }
+function userNavbar(){
+    let usuario = document.getElementById("productsUser");
+    const storedData = JSON.parse(sessionStorage.datos);
+    usuario.innerHTML += 
+    `<a class="nav-link" href="index.html">${storedData.email}</a>`
+}
+userNavbar()
