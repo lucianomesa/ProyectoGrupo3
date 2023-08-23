@@ -37,18 +37,23 @@
     </div>
   </nav>
   <main class="pb-5 container">
-    <div>
-      <div class="text-center p-4" id="containerTitulo">
+    <div class="text-center p-4" id="containerTitulo">
       </div>
-      <div class="col text-end" class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
+    <div class="container">
+      <div class="row">
+        <div class="col text-end">
+          <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
+           <input type="radio" class="btn-check" name="options" >
+          <label class="btn btn-light" id="maxMin" for="sortDesc">max-min</label>
           <input type="radio" class="btn-check" name="options" >
           <label class="btn btn-light" id="minMax" for="sortAsc">min-max</label>
-          <input type="radio" class="btn-check" name="options" >
-          <label class="btn btn-light" id="maxMin" for="sortDesc">Z-A</label>
           <input type="radio" class="btn-check" name="options"  checked>
           <label class="btn btn-light"  id="btnRelevancia" for="sortByCount"><i class="fas fa-sort-amount-down mr-1"></i></label>
           <input type="search" id="buscador" placeholder="Buscar productos...">
+          </div>
         </div>
+      </div>
+    <div>
       <div class="list-container">
       </div>
     </div>
