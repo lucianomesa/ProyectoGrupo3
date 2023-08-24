@@ -1,5 +1,8 @@
 //URL que contiene los datos
-const URL = "https://japceibal.github.io/emercado-api/cats_products/" + localStorage.getItem("catID") + ".json";
+const URL =
+  "https://japceibal.github.io/emercado-api/cats_products/" +
+  localStorage.getItem("catID") +
+  ".json";
 const storedData = JSON.parse(sessionStorage.datos);
 const listContainer = document.getElementsByClassName("list-container");
 const btnMinMax = document.getElementById("minMax");
@@ -40,9 +43,18 @@ function filterProductsByName(products, searchTerm) {
 
 // Función para filtrar productos por rango de precio
 function filterProductsByPriceRange(products, min, max) {
-  return products.filter(
-    (product) => product.cost >= min && product.cost <= max
-  );
+  return products.filter((product) => {
+    if (isNaN(min) && isNaN(max)) {
+      return true;
+    }
+    if (isNaN(min)) {
+      return product.cost <= max;
+    }
+    if (isNaN(max)) {
+      return product.cost >= min;
+    }
+    return product.cost >= min && product.cost <= max;
+  });
 }
 
 // Función para limpiar los filtros de rango de precio
@@ -61,33 +73,41 @@ async function getJsonData(url) {
   showData(data.products);
   titulo(data);
 
-  btnMinMax.addEventListener("click", function() {
+  btnMinMax.addEventListener("click", function () {
     showProducts(sortProductsByPriceAsc(data.products));
   });
-  
-  btnMaxMin.addEventListener("click", function() {
+
+  btnMaxMin.addEventListener("click", function () {
     showProducts(sortProductsByPriceDesc(data.products));
   });
-  
-  btnRelevancia.addEventListener("click", function() {
+
+  btnRelevancia.addEventListener("click", function () {
     showProducts(sortProductsByRelevance(data.products));
   });
-  
-  buscador.addEventListener("input", function(e) {
-    showProducts(filterProductsByName(data.products, e.target.value.toLowerCase()));
+
+  buscador.addEventListener("input", function (e) {
+    showProducts(
+      filterProductsByName(data.products, e.target.value.toLowerCase())
+    );
   });
-  
-  filtrar.addEventListener("click", function() {
+
+  filtrar.addEventListener("click", function () {
     const min = parseInt(rangeFilterCountMin.value);
     const max = parseInt(rangeFilterCountMax.value);
-    const filteredProducts = filterProductsByPriceRange(data.products, min, max);
+    console.log(min);
+    const filteredProducts = filterProductsByPriceRange(
+      data.products,
+      min,
+      max
+    );
     showProducts(sortProductsByPriceAsc(filteredProducts));
   });
-  
-  document.getElementById("clearRangeFilter").addEventListener("click", function() {
-    clearPriceRangeFilter(data.products);
-  });
-  
+
+  document
+    .getElementById("clearRangeFilter")
+    .addEventListener("click", function () {
+      clearPriceRangeFilter(data.products);
+    });
 }
 
 getJsonData(URL);
