@@ -34,10 +34,10 @@ function sortProductsByRelevance(products) {
   return products.sort((a, b) => b.soldCount - a.soldCount);
 }
 
-// Función para filtrar productos por nombre
+// Función para filtrar productos por nombre o descripcion
 function filterProductsByName(products, searchTerm) {
   return products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm)
+    product.name.toLowerCase().includes(searchTerm) || product.description.toLowerCase().includes(searchTerm)
   );
 }
 
