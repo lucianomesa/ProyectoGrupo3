@@ -45,7 +45,7 @@ function filterProductsByName(products, searchTerm) {
 function filterProductsByPriceRange(products, min, max) {
   return products.filter((product) => {
     if (isNaN(min) && isNaN(max)) {
-      return true;
+      return product.cost >= 0;
     }
     if (isNaN(min)) {
       return product.cost <= max;

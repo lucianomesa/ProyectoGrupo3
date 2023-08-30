@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function userNavbar() {
         const storedData = JSON.parse(sessionStorage.datos);
         usuario.innerHTML +=
-            `<a class="nav-link" href="index.html">${storedData.email}</a>`
+            `<a class="nav-link" href="my-profile.html">${storedData.email}</a>`
     }
     if (!sessionStorage.datos) {
         alert('Inicia sesion para continuar');
