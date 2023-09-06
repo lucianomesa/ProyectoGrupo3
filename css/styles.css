@@ -306,6 +306,38 @@ height: 75vh;
   color: black;
 }
 
+.heartbtn{
+  color: white;
+  opacity: 50%;
+  position: absolute;
+  margin-left: 50%;
+  margin-top: 1%;
+  font-size: 150%;
+}
+
+.heartbtn:hover{
+  color: #fff;
+  opacity: 100%;
+}
+
+.heartbtnok{
+  color: red;
+  opacity: 100%;
+  position: absolute;
+  margin-left: 50%;
+  font-size: 150%; 
+}
+
+.zoom:active{
+  width: 100%;
+}
+
+
+
+
+
+
+
 /* Animacion de circulo de fondo */
 
 .circle1 {

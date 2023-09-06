@@ -126,7 +126,7 @@ function titulo(items) {
 function showData(dataArray) {
   for (const item of dataArray) {
     listContainer[0].innerHTML += `
-        <div  class="list-group-item list-group-item-action cursor-active">
+        <div  class="list-group-item list-group-item-action cursor-active" onclick = "setProductsId(${item.id})">
                 <div class="row">
                     <div class="col-3">
                     <img src="${item.image}" alt="Imagen del modelo ${item.name}" class="img-thumbnail">
@@ -148,3 +148,8 @@ function userNavbar() {
   usuario.innerHTML += `<a class="nav-link" href="index.html">${storedData.email}</a>`;
 }
 userNavbar();
+
+function setProductsId(id){
+     localStorage.setItem("idProd", id);
+     window.location = "product-info.html" 
+}
