@@ -310,9 +310,12 @@ height: 75vh;
   color: white;
   opacity: 50%;
   position: absolute;
-  margin-left: 50%;
+  margin-left: 51.1%;
   margin-top: 1%;
+  margin-bottom: 80%;
   font-size: 150%;
+  background-color: transparent;
+  border: none;
 }
 
 .heartbtn:hover{
@@ -324,7 +327,7 @@ height: 75vh;
   color: red;
   opacity: 100%;
   position: absolute;
-  margin-left: 50%;
+  margin-left: 51.1%;
   font-size: 150%; 
 }
 

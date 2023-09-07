@@ -17,13 +17,7 @@ function productsInfo(item, data) {
     <hr />
     <div class="row">   
       <div class="col-md-8">
-          <button
-            class="btn text-end btn-block heartbtn"
-            id="heartbtn"
-            onclick="favorite()"
-          >
-            <i class="fas fa-heart" id="heart"></i>
-          </button>
+          
           <div
             class="ecommerce-gallery"
             data-mdb-zoom-effect="true"
@@ -32,25 +26,41 @@ function productsInfo(item, data) {
             <div class="row py-3 shadow-5">
               <div class="col-12 mb-1">
                 <div class="lightbox">
+                  <button
+              class="text-end btn-block heartbtn"
+              id="heartbtn"
+              onclick="favorite()"
+            >
+                  <i class="fas fa-heart" id="heart"></i>
+                  </button>
                   <img
                     src="img/prod${item.id}_1.jpg"
                     alt="Gallery image 1"
                     class="ecommerce-gallery-main-img active w-100"
                   />
+                  
                 </div>
               </div>
               <div class="col-3 mt-1">
                 <img
-                  src="img/prod${item.id}_2.jpg"
+                  src="img/prod${item.id}_1.jpg"
                   data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/14a.webp"
-                  alt="Gallery image 2"
+                  alt="Gallery image 1"
                   class="active w-100 "
                 />
               </div>
               <div class="col-3 mt-1">
                 <img
-                  src="img/prod${item.id}_3.jpg"
+                  src="img/prod${item.id}_2.jpg"
                   data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/12a.webp"
+                  alt="Gallery image 2"
+                  class="w-100"
+                />
+              </div>
+              <div class="col-3 mt-1">
+                <img
+                  src="img/prod${item.id}_3.jpg"
+                  data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/13a.webp"
                   alt="Gallery image 3"
                   class="w-100"
                 />
@@ -58,16 +68,8 @@ function productsInfo(item, data) {
               <div class="col-3 mt-1">
                 <img
                   src="img/prod${item.id}_4.jpg"
-                  data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/13a.webp"
-                  alt="Gallery image 4"
-                  class="w-100"
-                />
-              </div>
-              <div class="col-3 mt-1">
-                <img
-                  src="img/prod${item.id}_5.jpg"
                   data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/15a.webp"
-                  alt="Gallery image 5"
+                  alt="Gallery image 4"
                   class="w-100"
                 />
               </div>
