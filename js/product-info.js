@@ -94,36 +94,65 @@ function productsInfo(item, data) {
   <hr />
     `;
 }
-
-function comentarios(){
-   const coment = document.getElementById("comentarios");
-
-   coment.innerHTML +=  `
-   <div class="row">
-   <div class="col-md-8">
- <strong><h5>Comentarios</h5></strong>
-   <div>
-     <strong>
-       <p>Jhonatan</p>
-       <span class="fa fa-star checked"></span>
-       <span class="fa fa-star checked"></span>
-       <span class="fa fa-star checked"></span>
-       <span class="fa fa-star"></span>
-       <span class="fa fa-star"></span>
-     </strong>
-     <p>Me gusto el auto</p>
-   </div>
-   <form></form>
- </div>
-   <div/>
-   <div/>
-  `
-
-
-
+ let estrellasTotales = "";
+function estrellas(n) {
+ estrellasTotales = "";
+  const stars = document.getElementById("stars");
+  for (let i = 1; i <= n; i++) {
+    estrellasTotales += `<span class="fa fa-star checked"></span>`;
+  }
+  for (let j = n; j < 5; j++) {
+    estrellasTotales+= `<span class="fa fa-star"></span>`;
+  }
+  return estrellasTotales;
 }
 
-comentarios();
+const comentBtn = document.getElementById("comentbtn");
+
+comentBtn.addEventListener("click", function(e) {
+  e.preventDefault();
+  var selectElement = document.getElementById("calificacion");
+  var selectedValue = selectElement.value;
+  var comentario = document.getElementById("textComent");
+  var comentarios = document.getElementById("comText");
+  var nombre = document.getElementById("name");
+
+    const fecha = document.getElementById("fecha");
+  // Obtén la fecha actual
+var fechaActual = new Date();
+
+// Obtén los componentes de la fecha y hora
+var año = fechaActual.getFullYear();
+var mes = ('0' + (fechaActual.getMonth() + 1)).slice(-2); // Agrega un cero inicial si es necesario
+var dia = ('0' + fechaActual.getDate()).slice(-2); // Agrega un cero inicial si es necesario
+var hora = ('0' + fechaActual.getHours()).slice(-2); // Agrega un cero inicial si es necesario
+var minuto = ('0' + fechaActual.getMinutes()).slice(-2); // Agrega un cero inicial si es necesario
+var segundo = ('0' + fechaActual.getSeconds()).slice(-2); // Agrega un cero inicial si es necesario
+
+// Formatea la fecha y hora
+var fechaHoraFormateada = año + '-' + mes + '-' + dia + ' ' + hora + ':' + minuto + ':' + segundo;
+
+  const storedData = JSON.parse(sessionStorage.datos);
+  if(selectedValue >=1 && selectedValue <= 5 && comentario.value != ""){
+     comentarios.innerHTML += ` <div class="comentado">
+<div class="name" ><p ><strong>${storedData.email}</strong></p> </div>  
+<div class="fecha" class = "text-muted"><small> &nbsp; - ${fechaHoraFormateada} - &nbsp; </small></div>
+<div class="stars">${estrellas(selectedValue)} </div>
+
+</div>
+<div id="comText">${comentario.value}</div> 
+<hr>
+`
+     comentario.value = "";
+     
+     fecha();
+  }
+    else{
+      alert("Debes escribir un comentario y poner una puntuacion");
+    }
+});
+
+
 
 function favorite() {
     document.getElementById("heartbtn").classList.toggle("heartbtnok");
@@ -139,3 +168,5 @@ async function getJsonData(url) {
     productsInfo(filtro[0], data);
 }
 getJsonData(URL);
+
+

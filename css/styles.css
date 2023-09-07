@@ -337,9 +337,13 @@ height: 75vh;
 
 
 
+.comentado{
+  display: flex;
+}
 
-
-
+hr{
+  color: rgb(99, 30, 5);
+}
 
 /* Animacion de circulo de fondo */
 
