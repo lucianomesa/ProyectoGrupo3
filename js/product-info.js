@@ -15,8 +15,7 @@ function productsInfo(item, data) {
     <div>
     <h2 class="text-center pt-5">${item.name}</h2>
     <hr />
-    <div class="row"> 
-      
+    <div class="row">   
       <div class="col-md-8">
           <button
             class="btn text-end btn-block heartbtn"
@@ -34,7 +33,7 @@ function productsInfo(item, data) {
               <div class="col-12 mb-1">
                 <div class="lightbox">
                   <img
-                    src="img/prod50921_1.jpg"
+                    src="img/prod${item.id}_1.jpg"
                     alt="Gallery image 1"
                     class="ecommerce-gallery-main-img active w-100"
                   />
@@ -42,7 +41,7 @@ function productsInfo(item, data) {
               </div>
               <div class="col-3 mt-1">
                 <img
-                  src="img/prod50921_2.jpg"
+                  src="img/prod${item.id}_2.jpg"
                   data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/14a.webp"
                   alt="Gallery image 2"
                   class="active w-100 "
@@ -50,7 +49,7 @@ function productsInfo(item, data) {
               </div>
               <div class="col-3 mt-1">
                 <img
-                  src="img/prod50921_3.jpg"
+                  src="img/prod${item.id}_3.jpg"
                   data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/12a.webp"
                   alt="Gallery image 3"
                   class="w-100"
@@ -58,7 +57,7 @@ function productsInfo(item, data) {
               </div>
               <div class="col-3 mt-1">
                 <img
-                  src="img/prod50921_4.jpg"
+                  src="img/prod${item.id}_4.jpg"
                   data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/13a.webp"
                   alt="Gallery image 4"
                   class="w-100"
@@ -66,7 +65,7 @@ function productsInfo(item, data) {
               </div>
               <div class="col-3 mt-1">
                 <img
-                  src="img/prod50921_5.jpg"
+                  src="img/prod${item.id}_5.jpg"
                   data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/15a.webp"
                   alt="Gallery image 5"
                   class="w-100"

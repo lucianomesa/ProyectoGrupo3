@@ -12,7 +12,6 @@ function showAlertEmailError() {
 
 
 let btn = document.getElementById('boton-iniciar-sesion');
-
 let email = document.getElementById('email');
 let pw = document.getElementById('password');
 
