@@ -1,3 +1,10 @@
+function showAlertWarning() {
+  document.getElementById("alert-warning").classList.add("show");
+  setTimeout(() => {
+      document.getElementById("alert-warning").classList.remove("show");
+  },2000);
+}
+
 // Agrega el nombre de usuario a la barra de navegacion
 function userNavbar() {
     let usuario = document.getElementById("infoUser");
@@ -165,7 +172,7 @@ commentBtn.addEventListener("click", function(e) {
      comentario.value = "";
   }
     else{
-      alert("Debes escribir un comentario y poner una puntuacion");
+      showAlertWarning();
     }
 });
 
