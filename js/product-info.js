@@ -2,7 +2,7 @@ function showAlertWarning() {
   document.getElementById("alert-warning").classList.add("show");
   setTimeout(() => {
       document.getElementById("alert-warning").classList.remove("show");
-  },2000);
+  },1000);
 }
 
 // Agrega el nombre de usuario a la barra de navegacion
@@ -58,7 +58,6 @@ function productsInfo(item, data) {
                 <div class="col-3 mt-1">
                   <img onclick= "newImg(${item.id}, 1)"
                     src="img/prod${item.id}_1.jpg"
-                    data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/14a.webp"
                     alt="Gallery image 1"
                     class="active w-100 "
                   />
@@ -66,7 +65,6 @@ function productsInfo(item, data) {
                 <div class="col-3 mt-1">
                   <img onclick= "newImg(${item.id}, 2)"
                     src="img/prod${item.id}_2.jpg"
-                    data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/12a.webp"
                     alt="Gallery image 2"
                     class="w-100"
                   />
@@ -74,7 +72,6 @@ function productsInfo(item, data) {
                 <div class="col-3 mt-1">
                   <img onclick= "newImg(${item.id}, 3)"
                     src="img/prod${item.id}_3.jpg"
-                    data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/13a.webp"
                     alt="Gallery image 3"
                     class="w-100"
                   />
@@ -82,7 +79,6 @@ function productsInfo(item, data) {
                 <div class="col-3 mt-1">
                   <img onclick= "newImg(${item.id}, 4)"
                     src="img/prod${item.id}_4.jpg"
-                    data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/15a.webp"
                     alt="Gallery image 4"
                     class="w-100"
                   />
@@ -140,22 +136,22 @@ commentBtn.addEventListener("click", function(e) {
   e.preventDefault();
   let selectElement = document.getElementById("calificacion");
   let selectedValue = selectElement.value;
-  let comentario = document.getElementById("textComment");
-  let comentarios = document.getElementById("comText");
+  let comment = document.getElementById("textComment");
+  let comments = document.getElementById("comText");
 
   // Creacion de la fecha en el formato solicitado
   let date = new Date();
-  let year = fechaActual.getFullYear();
-  let month = ('0' + (fechaActual.getMonth() + 1)).slice(-2);
-  let day = ('0' + fechaActual.getDate()).slice(-2);
-  let hour = ('0' + fechaActual.getHours()).slice(-2); 
-  let minute = ('0' + fechaActual.getMinutes()).slice(-2);
-  let second = ('0' + fechaActual.getSeconds()).slice(-2);
+  let year = date.getFullYear();
+  let month = ('0' + (date.getMonth() + 1)).slice(-2);
+  let day = ('0' + date.getDate()).slice(-2);
+  let hour = ('0' + date.getHours()).slice(-2); 
+  let minute = ('0' + date.getMinutes()).slice(-2);
+  let second = ('0' + date.getSeconds()).slice(-2);
   let dateFormat = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
   const storedData = JSON.parse(sessionStorage.datos);
-  if(selectedValue >=1 && selectedValue <= 5 && comentario.value != ""){
-     comentarios.innerHTML += `
+  if(selectedValue != "Calificación" && comment.value != ""){
+     comments.innerHTML += `
       <div class="comentado">
         <div>
           <p><strong>${storedData.email.split("@")[0]}</strong></p>
@@ -163,12 +159,13 @@ commentBtn.addEventListener("click", function(e) {
         <div class="text-muted">
           <small> &nbsp; - ${dateFormat} - &nbsp; </small>
         </div>
-        <div class="stars">${starsCalif(selectedValue)}</div>
+        <div class="stars">${starCalif(selectedValue)}</div>
       </div>
-      <div>${comentario.value}</div> 
+      <div>${comment.value}</div> 
       <hr>
 `
-     comentario.value = "";
+     comment.value = "";
+     selectElement.value = "Calificación";
   }
     else{
       showAlertWarning();
@@ -197,7 +194,7 @@ getJsonData(URL);
 // Funcion que muestra los comentarios que vienen del JSON
 function nuevoCom(comments){
   for(let comment of comments){
-     comentarios.innerHTML += `
+     comText.innerHTML += `
       <div class="comentado">
         <div>
           <p><strong>${comment.user}</strong></p>
@@ -205,7 +202,7 @@ function nuevoCom(comments){
         <div class="text-muted">
           <small> &nbsp; - ${comment.dateTime} - &nbsp; </small>
         </div>
-        <div>${estrellas(comment.score)}</div>
+        <div>${starCalif(comment.score)}</div>
       </div>
       <div>${comment.description}</div> 
       <hr>

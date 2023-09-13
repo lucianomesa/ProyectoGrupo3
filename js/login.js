@@ -37,7 +37,7 @@ btn.addEventListener('click', function(e) {
 
     let expReg= /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
 
-    if(expReg.test(email.value) && email.value && pw.value.length > 7) {
+    if(expReg.test(email.value) && email.value && pw.value.length > 4) {
         showAlertSuccess();
         setTimeout(() => {
             location.href = 'index.html';
