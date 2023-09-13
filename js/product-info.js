@@ -7,11 +7,10 @@ function showAlertWarning() {
 
 // Agrega el nombre de usuario a la barra de navegacion
 function userNavbar() {
-    let usuario = document.getElementById("infoUser");
+    let user = document.getElementById("infoUser");
     const storedData = JSON.parse(sessionStorage.datos);
-    usuario.innerHTML += `<a class="nav-link" href="index.html">${storedData.email}</a>`;
+    user.innerHTML += `<a class="nav-link" href="index.html">${storedData.email}</a>`;
 }
-
 userNavbar();
 
 
@@ -57,7 +56,7 @@ function productsInfo(item, data) {
                   </div>
                 </div>
                 <div class="col-3 mt-1">
-                  <img onclick= "cambiarImg(${item.id}, 1)"
+                  <img onclick= "newImg(${item.id}, 1)"
                     src="img/prod${item.id}_1.jpg"
                     data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/14a.webp"
                     alt="Gallery image 1"
@@ -65,7 +64,7 @@ function productsInfo(item, data) {
                   />
                 </div>
                 <div class="col-3 mt-1">
-                  <img onclick= "cambiarImg(${item.id}, 2)"
+                  <img onclick= "newImg(${item.id}, 2)"
                     src="img/prod${item.id}_2.jpg"
                     data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/12a.webp"
                     alt="Gallery image 2"
@@ -73,7 +72,7 @@ function productsInfo(item, data) {
                   />
                 </div>
                 <div class="col-3 mt-1">
-                  <img onclick= "cambiarImg(${item.id}, 3)"
+                  <img onclick= "newImg(${item.id}, 3)"
                     src="img/prod${item.id}_3.jpg"
                     data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/13a.webp"
                     alt="Gallery image 3"
@@ -81,7 +80,7 @@ function productsInfo(item, data) {
                   />
                 </div>
                 <div class="col-3 mt-1">
-                  <img onclick= "cambiarImg(${item.id}, 4)"
+                  <img onclick= "newImg(${item.id}, 4)"
                     src="img/prod${item.id}_4.jpg"
                     data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/15a.webp"
                     alt="Gallery image 4"
@@ -114,23 +113,23 @@ function productsInfo(item, data) {
 
 
 // Funcion que cambia la imagen, segun la que toques
-function cambiarImg(id, num){
+function newImg(id, num){
 document.getElementById("img-lg").src = "img/prod"+ id +"_"+ num + ".jpg"
 }
 
 
-let estrellasTotales = "";
+let stars = "";
 
 // Funcion que toma la calificacion y devuelve el html para que se muestre en iconos de estrellas 
-function estrellas(n) {
- estrellasTotales = "";
+function starCalif(n) {
+ stars = "";
   for (let i = 1; i <= n; i++) {
-    estrellasTotales += `<span class="fa fa-star checked"></span>`;
+    stars += `<span class="fa fa-star checked"></span>`;
   }
   for (let j = n; j < 5; j++) {
-    estrellasTotales+= `<span class="fa fa-star"></span>`;
+    stars+= `<span class="fa fa-star"></span>`;
   }
-  return estrellasTotales;
+  return stars;
 }
 
 
@@ -145,14 +144,14 @@ commentBtn.addEventListener("click", function(e) {
   let comentarios = document.getElementById("comText");
 
   // Creacion de la fecha en el formato solicitado
-  let fechaActual = new Date();
-  let año = fechaActual.getFullYear();
-  let mes = ('0' + (fechaActual.getMonth() + 1)).slice(-2);
-  let dia = ('0' + fechaActual.getDate()).slice(-2);
-  let hora = ('0' + fechaActual.getHours()).slice(-2); 
-  let minuto = ('0' + fechaActual.getMinutes()).slice(-2);
-  let segundo = ('0' + fechaActual.getSeconds()).slice(-2);
-  let fechaHoraFormateada = año + '-' + mes + '-' + dia + ' ' + hora + ':' + minuto + ':' + segundo;
+  let date = new Date();
+  let year = fechaActual.getFullYear();
+  let month = ('0' + (fechaActual.getMonth() + 1)).slice(-2);
+  let day = ('0' + fechaActual.getDate()).slice(-2);
+  let hour = ('0' + fechaActual.getHours()).slice(-2); 
+  let minute = ('0' + fechaActual.getMinutes()).slice(-2);
+  let second = ('0' + fechaActual.getSeconds()).slice(-2);
+  let dateFormat = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
 
   const storedData = JSON.parse(sessionStorage.datos);
   if(selectedValue >=1 && selectedValue <= 5 && comentario.value != ""){
@@ -162,9 +161,9 @@ commentBtn.addEventListener("click", function(e) {
           <p><strong>${storedData.email.split("@")[0]}</strong></p>
         </div>  
         <div class="text-muted">
-          <small> &nbsp; - ${fechaHoraFormateada} - &nbsp; </small>
+          <small> &nbsp; - ${dateFormat} - &nbsp; </small>
         </div>
-        <div class="stars">${estrellas(selectedValue)}</div>
+        <div class="stars">${starsCalif(selectedValue)}</div>
       </div>
       <div>${comentario.value}</div> 
       <hr>
@@ -189,8 +188,8 @@ const idProducto = localStorage.getItem("idProd");
 async function getJsonData(url) {
     const response = await fetch(url);
     const data = await response.json();
-    const filtro = data.products.filter((item) => item.id == idProducto);
-    productsInfo(filtro[0], data);
+    const filter = data.products.filter((item) => item.id == idProducto);
+    productsInfo(filter[0], data);
 }
 
 getJsonData(URL);
