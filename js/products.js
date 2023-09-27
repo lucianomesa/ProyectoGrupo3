@@ -3,7 +3,7 @@ const URL =
   "https://japceibal.github.io/emercado-api/cats_products/" +
   localStorage.getItem("catID") +
   ".json";
-const storedData = JSON.parse(sessionStorage.datos);
+const storedData = JSON.parse(localStorage.datos);
 const listContainer = document.getElementsByClassName("list-container");
 const btnMinMax = document.getElementById("minMax");
 const btnMaxMin = document.getElementById("maxMin");
@@ -145,7 +145,19 @@ function showData(dataArray) {
 }
 function userNavbar() {
   let usuario = document.getElementById("productsUser");
-  usuario.innerHTML += `<a class="nav-link" href="index.html">${storedData.email}</a>`;
+  usuario.innerHTML +=  `<div class="btn-group">
+  <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="profile-menu">
+  ${storedData.email.split("@")[0]}
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="cart.html">Mi Carrito</a></li>
+    <li><a class="dropdown-item" href="my-profile.html">Mi Perfil</a></li>
+    <li onclick="changeTheme()"> <a class="dropdown-item" href = "#">Cambiar a <i class="bi bi-moon-fill" id="dl-icon"></i></a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li onclick="logOut()"><a href = "#" class="dropdown-item">Cerrar Sesion</a></li>
+  </ul>
+</div>
+    `;
 }
 userNavbar();
 

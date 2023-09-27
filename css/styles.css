@@ -345,6 +345,13 @@ hr{
   color: rgb(99, 30, 5);
 }
 
+#profile-menu{
+ color: white;
+ border: none;
+}
+
+
+
 /* Animacion de circulo de fondo */
 
 .circle1 {
