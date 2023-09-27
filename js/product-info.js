@@ -5,14 +5,6 @@ function showAlertWarning() {
   }, 1000);
 }
 
-// Agrega el nombre de usuario a la barra de navegacion
-function userNavbar() {
-  let user = document.getElementById("infoUser");
-  const storedData = JSON.parse(localStorage.datos);
-  user.innerHTML += `<a class="nav-link" href="index.html">${storedData.email}</a>`;
-}
-userNavbar();
-
 // Url que llama al JSON de los comentarios de cada producto
 const URLCOM =
   "https://japceibal.github.io/emercado-api/products_comments/" +
@@ -63,34 +55,7 @@ function productsInfo(item) {
                     />
                   </div>
                 </div>
-                <div class="col-3 mt-1">
-                  <img onclick= "newImg(${item.id}, 1)"
-                    src=${item.images[0]}
-                    alt="Gallery image 1"
-                    class="active w-100 "
-                  />
-                </div>
-                <div class="col-3 mt-1">
-                  <img onclick= "newImg(${item.id}, 2)"
-                    src= ${item.images[1]}
-                    alt="Gallery image 2"
-                    class="w-100"
-                  />
-                </div>
-                <div class="col-3 mt-1">
-                  <img onclick= "newImg(${item.id}, 3)"
-                    src=${item.images[2]}
-                    alt="Gallery image 3"
-                    class="w-100"
-                  />
-                </div>
-                <div class="col-3 mt-1">
-                  <img onclick= "newImg(${item.id}, 4)"
-                    src=${item.images[3]}
-                    alt="Gallery image 4"
-                    class="w-100"
-                  />
-                </div>
+                ${generateImages(item)}
               </div>
             </div>
           </div>
@@ -114,6 +79,25 @@ function productsInfo(item) {
       </div>
     `;
 }
+
+function generateImages(item) {
+  let images = '';
+  for (let i = 0; i < item.images.length; i++) {
+    images += `
+      <div class="col-3 mt-1">
+      <a href = "#">
+      <img onclick="newImg(${item.id}, ${i + 1})"
+          src="${item.images[i]}"
+          alt="Gallery image ${i + 1}"
+          class="w-100"
+        />
+      </a>
+      </div>
+    `;
+  }
+  return images;
+}
+
 
 // Funcion que cambia la imagen, segun la que toques
 function newImg(id, num) {
@@ -188,11 +172,13 @@ function showRelatedProducts(array) {
   let relatedProductsHTML = "";
   for (let i = 0; i < array.relatedProducts.length; i++) {
     relatedProductsHTML += `
-      <div class="col-md-2 img-thumbnail m-1" onclick="setProdId(${array.relatedProducts[i].id})">
+   
+    <div class="col-md-2 img-thumbnail m-1" onclick="setProdId(${array.relatedProducts[i].id})">
+      <a href = "#">
         <img src= ${array.relatedProducts[i].image} class="img-fluid">
         <h6>${array.relatedProducts[i].name}</h6>
+         </a> 
       </div>
-      
   `;
   }
 

@@ -143,23 +143,6 @@ function showData(dataArray) {
         `;
   }
 }
-function userNavbar() {
-  let usuario = document.getElementById("productsUser");
-  usuario.innerHTML +=  `<div class="btn-group">
-  <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="profile-menu">
-  ${storedData.email.split("@")[0]}
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="cart.html">Mi Carrito</a></li>
-    <li><a class="dropdown-item" href="my-profile.html">Mi Perfil</a></li>
-    <li onclick="changeTheme()"> <a class="dropdown-item" href = "#">Cambiar a <i class="bi bi-moon-fill" id="dl-icon"></i></a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li onclick="logOut()"><a href = "#" class="dropdown-item">Cerrar Sesion</a></li>
-  </ul>
-</div>
-    `;
-}
-userNavbar();
 
 function setProductsId(id){
      localStorage.setItem("idProd", id);
