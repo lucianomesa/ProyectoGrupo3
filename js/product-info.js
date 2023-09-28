@@ -1,3 +1,4 @@
+// Función que muestra la alerta cuando el comentario no cumple los requisitos
 function showAlertWarning() {
   document.getElementById("alert-warning").classList.add("show");
   setTimeout(() => {
@@ -5,17 +6,20 @@ function showAlertWarning() {
   }, 1000);
 }
 
+
 // Url que llama al JSON de los comentarios de cada producto
 const URLCOM =
   "https://japceibal.github.io/emercado-api/products_comments/" +
   localStorage.getItem("idProd") +
   ".json";
 
+
 // Url que llama al JSON de las categorias
 const URL =
   "https://japceibal.github.io/emercado-api/cats_products/" +
   localStorage.getItem("catID") +
   ".json";
+
 
 //Url de info de productos
 const URLPROD =
@@ -24,6 +28,7 @@ const URLPROD =
   ".json";
 
 const products = document.getElementById("productInfo");
+
 
 // Funcion que muestra la informacion del producto en el div de productos
 function productsInfo(item) {
@@ -80,21 +85,25 @@ function productsInfo(item) {
     `;
 }
 
+
+// Genera las imágenes de la galería del producto
 function generateImages(item) {
   let images = '';
+  
   for (let i = 0; i < item.images.length; i++) {
     images += `
       <div class="col-3 mt-1">
-      <a href = "#">
-      <img onclick="newImg(${item.id}, ${i + 1})"
-          src="${item.images[i]}"
-          alt="Gallery image ${i + 1}"
-          class="w-100"
-        />
-      </a>
+        <a href = "#">
+          <img onclick="newImg(${item.id}, ${i + 1})"
+            src="${item.images[i]}"
+            alt="Gallery image ${i + 1}"
+            class="w-100"
+          />
+        </a>
       </div>
     `;
   }
+
   return images;
 }
 
@@ -141,7 +150,8 @@ commentBtn.addEventListener("click", function (e) {
 
   const storedData = JSON.parse(sessionStorage.datos);
   if (selectedValue != "Calificación" && comment.value != "") {
-    comments.innerHTML += `
+    comments.innerHTML +=
+    `
       <div class="comentado">
         <div>
           <p><strong>${storedData.email.split("@")[0]}</strong></p>
@@ -153,7 +163,7 @@ commentBtn.addEventListener("click", function (e) {
       </div>
       <div>${comment.value}</div> 
       <hr>
-`;
+    `;
     comment.value = "";
     selectElement.value = "Calificación";
   } else {
@@ -161,35 +171,40 @@ commentBtn.addEventListener("click", function (e) {
   }
 });
 
-const productsRelated = document.getElementById("related-products");
 
+// Guarda el id del producto en el localStorage
 function setProdId(id) {
   localStorage.setItem("idProd", id);
   window.location = "product-info.html";
 }
 
+
+const productsRelated = document.getElementById("related-products");
+
+// Agrega la información de los productos relacionados
 function showRelatedProducts(array) {
   let relatedProductsHTML = "";
   for (let i = 0; i < array.relatedProducts.length; i++) {
-    relatedProductsHTML += `
-   
-    <div class="col-md-2 img-thumbnail m-1" onclick="setProdId(${array.relatedProducts[i].id})">
-      <a href = "#">
-        <img src= ${array.relatedProducts[i].image} class="img-fluid">
-        <h6>${array.relatedProducts[i].name}</h6>
-         </a> 
+    relatedProductsHTML +=
+    `
+      <div class="col-md-2 img-thumbnail m-1" onclick="setProdId(${array.relatedProducts[i].id})">
+        <a href = "#">
+          <img src= ${array.relatedProducts[i].image} class="img-fluid">
+          <h6>${array.relatedProducts[i].name}</h6>
+        </a> 
       </div>
-  `;
+    `;
   }
 
-  // Una vez que hayas construido el HTML, lo asignas a productsRelated
   productsRelated.innerHTML = relatedProductsHTML;
 }
+
 
 // Funcion que cambia el color del icono de favoritos, cuando le damos click
 function favorite() {
   document.getElementById("heartbtn").classList.toggle("heartbtnok");
 }
+
 
 const idProducto = localStorage.getItem("idProd");
 
@@ -202,6 +217,7 @@ async function getJsonData(url) {
 }
 
 getJsonData(URLPROD);
+
 
 // Funcion que muestra los comentarios que vienen del JSON
 function nuevoCom(comments) {
