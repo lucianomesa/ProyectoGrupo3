@@ -188,9 +188,9 @@ function showRelatedProducts(array) {
     relatedProductsHTML +=
     `
       <div class="col-md-2 img-thumbnail m-1" onclick="setProdId(${array.relatedProducts[i].id})">
-        <a href = "#">
+        <a class="link-dark" href = "#">
           <img src= ${array.relatedProducts[i].image} class="img-fluid">
-          <h6>${array.relatedProducts[i].name}</h6>
+          <h6 class="pt-2">${array.relatedProducts[i].name}</h6>
         </a> 
       </div>
     `;
