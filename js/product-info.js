@@ -44,10 +44,10 @@ function productsInfo(item) {
               data-mdb-auto-height="true"
             >
               <div class="row py-3 shadow-5">
-                <div class="col-12 mb-1">
+                <div class="col-12 mb-1 position-relative">
                   <div class="lightbox">
                     <button
-                      class="text-end btn-block heartbtn"
+                      class="btn-block heartbtn position-absolute top-0 end-0 me-3 mt-1"
                       id="heartbtn"
                       onclick="favorite()"
                     >
