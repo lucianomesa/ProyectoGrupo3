@@ -74,7 +74,7 @@ function productsInfo(item) {
             <strong>Cantidad de Vendidos</strong>
             <p>${item.soldCount}</p>
             <button class="btn btn-primary">Comprar<i></i></button>
-            <button class="btn btn-dark">
+            <button class="btn btn-dark" id = "cartBtn">
               Agregar
               <i class="fas fa-shopping-cart"></i>
             </button>
@@ -205,15 +205,40 @@ function favorite() {
   document.getElementById("heartbtn").classList.toggle("heartbtnok");
 }
 
-
 const idProducto = localStorage.getItem("idProd");
 
-// Funcion que trae la informacion del JSON sobre el producto que seleccionamos
 async function getJsonData(url) {
   const response = await fetch(url);
   const data = await response.json();
   productsInfo(data);
   showRelatedProducts(data);
+
+ 
+  const btnCart = document.getElementById("cartBtn");
+
+  
+ // Obtén el valor de list desde sessionStorage
+let listCart = JSON.parse(sessionStorage.getItem("list")) || [];
+
+btnCart.addEventListener("click", function() {
+  const obj = {
+    "id": data.id,
+    "name": data.name,
+    "count": 1,
+    "unitCost": data.cost,
+    "currency": data.currency,
+    "image": `img/prod${data.id}_1.jpg`
+  };
+
+  // Agrega el objeto a la lista y actualiza sessionStorage
+  listCart.push(obj);
+  sessionStorage.setItem("list", JSON.stringify(listCart));
+
+  // Ahora también actualiza localStorage
+  localStorage.setItem("list", JSON.stringify(listCart));
+  console.log(listCart);
+});
+  
 }
 
 getJsonData(URLPROD);
