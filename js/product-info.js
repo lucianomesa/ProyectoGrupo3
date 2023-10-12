@@ -1,10 +1,4 @@
-// Función que muestra la alerta cuando el comentario no cumple los requisitos
-function showAlertWarning() {
-  document.getElementById("alert-warning").classList.add("show");
-  setTimeout(() => {
-    document.getElementById("alert-warning").classList.remove("show");
-  }, 1000);
-}
+
 
 // Url que llama al JSON de los comentarios de cada producto
 const URLCOM =
@@ -81,6 +75,14 @@ function productsInfo(item) {
     `;
 }
 
+// Función que muestra la alerta cuando el comentario no cumple los requisitos
+function showAlertWarning() {
+  document.getElementById("alert-warning").classList.add("show");
+  setTimeout(() => {
+    document.getElementById("alert-warning").classList.remove("show");
+  }, 1000);
+}
+
 // Genera las imágenes de la galería del producto
 function generateImages(item) {
   let images = "";
@@ -142,7 +144,7 @@ commentBtn.addEventListener("click", function (e) {
   let dateFormat =
     year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
 
-  const storedData = JSON.parse(sessionStorage.datos);
+  const storedData = JSON.parse(localStorage.datos);
   if (selectedValue != "Calificación" && comment.value != "") {
     comments.innerHTML += `
       <div class="comentado">
