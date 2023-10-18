@@ -86,17 +86,17 @@
        <div class="row">
         <div class="col">
           <label for="exampleInputEmail1" class="form-label">Calle</label>
-          <input type="email" class="form-control w-75" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <input type="email" class="form-control w-75" id="exampleInputEmail1" aria-describedby="emailHelp" required>
         </div>
         <div class="col ">
           <label for="exampleInputEmail1" class="form-label">Numero</label>
-          <input type="email" class="form-control w-75" id="exampleInputEmail2" aria-describedby="emailHelp">
+          <input type="email" class="form-control w-75" id="exampleInputEmail2" aria-describedby="emailHelp" required>
         </div>
        </div>
        <div class="row">
         <div class="col">
           <label for="exampleInputEmail1" class="form-label">Esquina</label>
-          <input type="email" class="form-control w-75" id="exampleInputEmail3" aria-describedby="emailHelp">
+          <input type="email" class="form-control w-75" id="exampleInputEmail3" aria-describedby="emailHelp" required>
         </div>
         <div class="col">
         </div>
@@ -128,15 +128,68 @@
     </div>
     <hr>
     <h4 class="m-5">Formas de Pago</h4>
+     <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Launch static backdrop modal
+</button>
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
-
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
-      ...fgsfgdfgdfg
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Forma de Pago</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-check m-lg-3">
+              <input class="form-check-input" type="radio" name="paymentMethod" id="creditCardRadio" required>
+              <label class="form-check-label" for="creditCardRadio">
+                  Tarjeta de crédito <i class="bi bi-credit-card"></i>
+              </label>
+          </div>
+          <hr>
+          <div class="row">
+              <div class="col">
+                  <label for="creditCardNumber" class="form-label">Número de tarjeta</label>
+                  <input type="text" class="form-control w-75" id="creditCardNumber" aria-describedby="emailHelp" required>
+              </div>
+              <div class="col">
+                  <label for="securityCode" class="form-label">Código de seguridad</label>
+                  <input type="text" class="form-control w-75" id="securityCode" aria-describedby="emailHelp" required>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col">
+                  <label for="expirationDate" class="form-label">Vencimiento (MM/AA)</label>
+                  <input type="text" class="form-control w-75" id="expirationDate" aria-describedby="emailHelp" required>
+              </div>
+              <div class="col"></div>
+          </div>
+          <div class="form-check m-lg-3">
+              <input class="form-check-input" type="radio" name="paymentMethod" id="bankTransferRadio">
+              <label class="form-check-label" for="bankTransferRadio">
+                  Transferencia bancaria
+              </label>
+          </div>
+          <hr>
+          <div class="row">
+              <div class="col">
+                  <label for="accountNumber" class="form-label">Número de cuenta</label>
+                  <input type="text" class="form-control w-75" id="accountNumber" aria-describedby="emailHelp" placeholder required>
+              </div>
+              <div class="col"></div>
+          </div>
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+          </div>
+      </form>
+      </div>
+      
     </div>
   </div>
+</div>
 </div>
    </div>
 
