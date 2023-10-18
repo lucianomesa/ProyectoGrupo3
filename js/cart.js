@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const contadorInput = productContainer.querySelector(".contador");
     contadorInput.addEventListener("input", function () {
       agregarTotal(contadorInput.value, arr);
+      
     });
   }
 
@@ -53,4 +54,42 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
   getJsonData(urlCart); 
+
+  function subTotal(arr){
+   let cont = 0;
+   let unSub = 0;
+   for(let i = 0; i < arr.length; i++){
+    if(arr[i].currency === "UYU"){
+         unSub = (parseInt(arr[i].count)*arr[i].unitCost)/40;
+         cont = cont + unSub;
+    }
+    else{
+      unSub = (parseInt(arr[i].count)*arr[i].unitCost);
+      cont = cont + unSub;
+    }
+    
+   }
+   return cont;
+  }
+  console.log(subTotal(JSON.parse(localStorage.getItem("list"))));
+
+  let sub_total = document.getElementById("subTotal");
+  let costSend =  document.getElementById("costSend");
+  let totalTotal = document.getElementById("totalTotal");
+
+  sub_total.innerHTML = `USD-${Math.round(subTotal(JSON.parse(localStorage.getItem("list"))))}`;
+
+
+         // Obtén todos los elementos de radio con el atributo "name" igual a "flexRadioDefault"
+         var radioButtons = document.querySelectorAll('input[name="flexRadioDefault"]');
+        
+         // Agrega un evento "change" a cada radio button para detectar cambios
+         radioButtons.forEach(function(radioButton) {
+             radioButton.addEventListener('change', function() {
+                 // Muestra el valor seleccionado en el elemento con id "valorSeleccionado"
+                 costSend.innerHTML = `USD-${Math.round(radioButton.value*subTotal(JSON.parse(localStorage.getItem("list"))))}`; 
+                  totalTotal.innerHTML = `USD-${Math.round(subTotal(JSON.parse(localStorage.getItem("list"))) + radioButton.value*subTotal(JSON.parse(localStorage.getItem("list"))))}`
+
+             });
+         });
 });

@@ -65,19 +65,19 @@
     <form class="container">
        
       <div class="form-check m-lg-3">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="0.15">
         <label class="form-check-label" for="flexRadioDefault1">
           Premium 2 a 5 dias(15%)
         </label>
       </div>
       <div class="form-check m-lg-3">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="0.07">
         <label class="form-check-label" for="flexRadioDefault2">
           Express 5 a 8 dias(7%)
         </label>
       </div>
       <div class="form-check m-lg-3">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" checked>
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault3" value="0.05">
         <label class="form-check-label" for="flexRadioDefault2">
           Standard 12 a 15 dias(5%)
         </label>
@@ -103,6 +103,41 @@
        </div>
     </form>
     <hr>
+    <h4 class="m-5">Costos</h4>
+    <div class="list-group">
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">SubTotal</h5>
+          <p class="text-muted" id = "subTotal"></p>
+        </div>
+        <p class="mb-1">Costo unitario del producto por cantidad.</p>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">Costo de Envío</h5>
+          <p class="text-muted" id = "costSend"></p>
+        </div>
+        <p class="mb-1">Segun el tipo de envío.</p>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">Total ($)</h5>
+          <p class="text-muted" id = "totalTotal"></p>
+        </div>
+      </a>
+    </div>
+    <hr>
+    <h4 class="m-5">Formas de Pago</h4>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      ...fgsfgdfgdfg
+    </div>
+  </div>
+</div>
    </div>
 
    
