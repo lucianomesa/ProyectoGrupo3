@@ -26,22 +26,17 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="col">${arr.name}</div>
       <div class="col d-none d-lg-block d-md-block d-xl-block">${arr.currency} ${arr.unitCost}</div>
       <div class="col ms-auto"><input type="number" class="form-control form-control-sm m-auto contador" min="1" max="100" value="${arr.count}"> <br></div>
-      <div class="col ms-auto" id="total-${arr.id}">${arr.currency}-${arr.unitCost * arr.count}</div>
-    
-    `;
+      <div class="col ms-auto" id="total-${arr.id}">${arr.currency}-${arr.unitCost * arr.count}</div>`;
     products.appendChild(productContainer);
-
     const contadorInput = productContainer.querySelector(".contador");
     contadorInput.addEventListener("input", function () {
-      agregarTotal(contadorInput.value, arr);
-
+    agregarTotal(contadorInput.value, arr);
     });
   }
 
   async function getJsonData(url) {
     const response = await fetch(url);
     const data = await response.json();
-
     let listCart = JSON.parse(localStorage.getItem("list")) || [];
     const productIdToAdd = data.articles[0].id;
     const isProductInCart = listCart.some(item => item.id === productIdToAdd);
@@ -76,7 +71,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let sub_total = document.getElementById("subTotal");
   let costSend = document.getElementById("costSend");
   let totalTotal = document.getElementById("totalTotal");
-
   sub_total.innerHTML = `USD-${Math.round(subTotal(JSON.parse(localStorage.getItem("list"))))}`;
 
 
@@ -85,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Agrega un evento "change" a cada radio button para detectar cambios
   radioButtons.forEach(function (radioButton) {
-    radioButton.addEventListener('change', function () {
+    radioButton.addEventListener('input', function () {
       // Muestra el valor seleccionado en el elemento con id "valorSeleccionado"
       costSend.innerHTML = `USD-${Math.round(radioButton.value * subTotal(JSON.parse(localStorage.getItem("list"))))}`;
       totalTotal.innerHTML = `USD-${Math.round(subTotal(JSON.parse(localStorage.getItem("list"))) + radioButton.value * subTotal(JSON.parse(localStorage.getItem("list"))))}`
@@ -99,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const bankTransferFields = document.querySelectorAll('#accountNumber');
 
   // Agregar eventos de cambio a los botones de radio
-  document.getElementById('creditCardRadio').addEventListener('change', function () {
+  document.getElementById('creditCardRadio').addEventListener('input', function () {
     // Si se selecciona "Tarjeta de crédito", habilitar los campos de tarjeta de crédito
     creditCardFields.forEach(field => field.disabled = !this.checked);
 
@@ -107,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
     bankTransferFields.forEach(field => field.disabled = this.checked);
   });
 
-  document.getElementById('bankTransferRadio').addEventListener('change', function () {
+  document.getElementById('bankTransferRadio').addEventListener('input', function () {
     // Si se selecciona "Transferencia bancaria", habilitar los campos de transferencia bancaria
     bankTransferFields.forEach(field => field.disabled = !this.checked);
 
