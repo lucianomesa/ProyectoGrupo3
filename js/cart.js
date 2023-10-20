@@ -1,6 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
   const urlCart = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
   const products = document.getElementById("cartProduct");
+  let sub_total = document.getElementById("subTotal");
+  let costSend = document.getElementById("costSend");
+  let totalTotal = document.getElementById("totalTotal");
+  var radioButtons = document.querySelectorAll('input[name="flexRadioDefault"]');
+
 
   function agregarTotal(val, arr) {
     const tot = document.getElementById(`total-${arr.id}`);
@@ -30,7 +35,22 @@ document.addEventListener("DOMContentLoaded", function () {
     products.appendChild(productContainer);
     const contadorInput = productContainer.querySelector(".contador");
     contadorInput.addEventListener("input", function () {
-    agregarTotal(contadorInput.value, arr);
+      agregarTotal(contadorInput.value, arr);
+      sub_total.innerHTML = `USD-${subTotal(JSON.parse(localStorage.getItem("list")))}`;   
+      // Actualizar costSend y totalTotal
+      const selectedShippingCost = parseFloat(document.querySelector('input[name="flexRadioDefault"]:checked').value);
+      costSend.innerHTML = `USD-${selectedShippingCost * subTotal(JSON.parse(localStorage.getItem("list")))}`;
+      totalTotal.innerHTML = `USD-${subTotal(JSON.parse(localStorage.getItem("list"))) + selectedShippingCost * subTotal(JSON.parse(localStorage.getItem("list")))}`;
+      if(contadorInput.value = 0){
+        contadorInput.value++;
+      }
+    });
+    //funcion para envitar que la cantidad de producto sea mayor a 0
+    var inputs = document.querySelectorAll('input[type=number]');
+    inputs.forEach(function(input) {
+        input.addEventListener('keydown', function(e) {
+            e.preventDefault();
+        });
     });
   }
 
@@ -68,22 +88,20 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   console.log(subTotal(JSON.parse(localStorage.getItem("list"))));
 
-  let sub_total = document.getElementById("subTotal");
-  let costSend = document.getElementById("costSend");
-  let totalTotal = document.getElementById("totalTotal");
   sub_total.innerHTML = `USD-${Math.round(subTotal(JSON.parse(localStorage.getItem("list"))))}`;
 
 
+
   // Obtén todos los elementos de radio con el atributo "name" igual a "flexRadioDefault"
-  var radioButtons = document.querySelectorAll('input[name="flexRadioDefault"]');
+
 
   // Agrega un evento "change" a cada radio button para detectar cambios
   radioButtons.forEach(function (radioButton) {
+    
     radioButton.addEventListener('input', function () {
       // Muestra el valor seleccionado en el elemento con id "valorSeleccionado"
-      costSend.innerHTML = `USD-${Math.round(radioButton.value * subTotal(JSON.parse(localStorage.getItem("list"))))}`;
-      totalTotal.innerHTML = `USD-${Math.round(subTotal(JSON.parse(localStorage.getItem("list"))) + radioButton.value * subTotal(JSON.parse(localStorage.getItem("list"))))}`
-
+      costSend.innerHTML = `USD-${radioButton.value * subTotal(JSON.parse(localStorage.getItem("list")))}`;
+      totalTotal.innerHTML = `USD-${subTotal(JSON.parse(localStorage.getItem("list"))) + radioButton.value * subTotal(JSON.parse(localStorage.getItem("list")))}`
     });
   });
 
@@ -109,3 +127,72 @@ document.addEventListener("DOMContentLoaded", function () {
     creditCardFields.forEach(field => field.disabled = this.checked);
   });
 });
+
+
+(function () {
+  "use strict";
+  var forms = document.querySelectorAll(".needs-validation");
+  Array.prototype.slice.call(forms).forEach(function (form) {
+    form.addEventListener(
+      "submit",
+      function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add("was-validated");
+      },
+      false
+    );
+  });
+})();
+
+const pago =  document.getElementById("pago");
+const inputTarjeta = document.getElementById("creditCardRadio");
+const inputTraferencia =  document.getElementById("bankTransferRadio");
+const radio15 = document.getElementById("flexRadioDefault1");
+const radio7 = document.getElementById("flexRadioDefault2");
+const radio5 = document.getElementById("flexRadioDefault3");
+
+
+inputTarjeta.addEventListener("input", function(){
+  if(inputTarjeta.checked){
+    pago.innerHTML = `Tarjeta de Credito  `
+    alertPago.innerHTML = "";
+  }
+})
+
+inputTraferencia.addEventListener("input", function(){
+  if(inputTraferencia.checked){
+    pago.innerHTML = `Tranferencia Bancaria  `
+    alertPago.innerHTML = "";
+  }
+
+})
+
+const btnTotal = document.getElementById("btnTotal");
+const creditCardNumber = document.getElementById("creditCardNumber");
+const securityCode = document.getElementById("securityCode");
+const expirationDate = document.getElementById("expirationDate");
+const alertPago = document.getElementById("alertPago");
+const accountNumber = document.getElementById("accountNumber");
+const noSend = document.getElementById("noSend");
+
+btnTotal.addEventListener("click", function(){
+  if((inputTarjeta.checked && !creditCardNumber.value && !securityCode.value && !expirationDate.value) || (inputTraferencia.checked && !accountNumber.value)){
+      alertPago.innerHTML = `Debe seleccionar un metodo de pago`
+  
+  }
+  else{
+    alertPago.innerHTML = "";
+  }
+  if(!inputTarjeta.checked && !inputTraferencia.checked){
+    alertPago.innerHTML = `Debe seleccionar un metodo de pago`
+  }
+  if(!radio15.checked && !radio5.checked && !radio7.cheked){
+    noSend.innerHTML = `Seleccione un tipo de envío`;
+  }
+  if(radio15.checked || radio5.checked || radio7.cheked){
+    noSend.innerHTML = ``;
+  }
+})

@@ -33,39 +33,34 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item navbarUser">
-
           </li>
         </ul>
       </div>
     </div>
   </nav>
   <main>
-
     <div class="container">
-
       <h1 class="text-center fw-light">Carrito de Compras</h1>
       <h4 class="m-5">Articulos a Comprar</h4>
-
       <div class="container text-lg-center">
         <div class="row row-cols-md-5">
           <div class="col"></div>
           <div class="col">Nombre</div>
           <div class="col d-none d-md-block d-lg-block">Costo</div>
           <div class="col">Cantidad</div>
-
           <div class="col">SubTotal</div>
         </div>
-
         <hr>
         <div class="row" id="cartProduct">
-
         </div>
         <hr>
       </div>
       <h4 class="m-5">Tipo de Envio</h4>
-      <form action="#" class="container">
-
+      <form action="#"class="container needs-validation"
+      novalidate id="form">
+      <span class="text-danger" id="noSend"></span>
         <div class="form-check m-lg-3">
+          
           <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" value="0.15">
           <label class="form-check-label" for="flexRadioDefault1">
             Premium 2 a 5 dias(15%)
@@ -88,23 +83,24 @@
           <div class="col">
             <label for="exampleInputEmail1" class="form-label">Calle</label>
             <input type="text" class="form-control w-75" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+            <div class="invalid-feedback">Ingrese una calle.</div>
           </div>
           <div class="col ">
             <label for="exampleInputEmail2" class="form-label">Numero</label>
             <input type="text" class="form-control w-75" id="exampleInputEmail2" aria-describedby="emailHelp" required>
+            <div class="invalid-feedback">Ingrese un numero.</div>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <label for="exampleInputEmail3" class="form-label">Esquina</label>
             <input type="text" class="form-control w-75" id="exampleInputEmail3" aria-describedby="emailHelp" required>
+            <div class="invalid-feedback">ingrese una esquina.</div>
           </div>
           <div class="col">
           </div>
         </div>
-
-      </form>
-      <hr>
+         <hr>
       <h4 class="m-5">Costos</h4>
       <div class="list-group">
         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
@@ -131,77 +127,76 @@
       <hr>
       <h4 class="m-5">Formas de Pago</h4>
       <!-- Button trigger modal -->
-      <p>Transferencia bancaria <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Seleccionar</a></p>
+      <p><span id = "pago">No a seleccionado </span><a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Seleccionar</a></p>
+      <span id="alertPago" class="text-danger"></span>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="d-grid gap-1 align-items-center col-10 offset-2">
+      <button class="btn w-75 btn-lg btn-primary" type="submit" id="btnTotal">Finalizar Compra</button>
+    </div>
+    </div>
 
-      <!-- Modal -->
-      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Forma de Pago</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <form>
-                <div class="form-check m-lg-3">
-                  <input class="form-check-input" type="radio" name="paymentMethod" id="creditCardRadio" required>
-                  <label class="form-check-label" for="creditCardRadio">
-                    Tarjeta de crédito <i class="bi bi-credit-card"></i>
-                  </label>
-                </div>
-                <hr>
-                <div class="row">
-                  <div class="col">
-                    <label for="creditCardNumber" class="form-label">Número de tarjeta</label>
-                    <input type="text" class="form-control w-75" id="creditCardNumber" aria-describedby="emailHelp"
-                      required>
-                  </div>
-                  <div class="col">
-                    <label for="securityCode" class="form-label">Código de seguridad</label>
-                    <input type="text" class="form-control w-75" id="securityCode" aria-describedby="emailHelp"
-                      required>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <label for="expirationDate" class="form-label">Vencimiento (MM/AA)</label>
-                    <input type="text" class="form-control w-75" id="expirationDate" aria-describedby="emailHelp"
-                      required>
-                  </div>
-                  <div class="col"></div>
-                </div>
-                <div class="form-check m-lg-3">
-                  <input class="form-check-input" type="radio" name="paymentMethod" id="bankTransferRadio">
-                  <label class="form-check-label" for="bankTransferRadio">
-                    Transferencia bancaria
-                  </label>
-                </div>
-                <hr>
-                <div class="row">
-                  <div class="col">
-                    <label for="accountNumber" class="form-label">Número de cuenta</label>
-                    <input type="text" class="form-control w-75" id="accountNumber" aria-describedby="emailHelp"
-                      placeholder required>
-                  </div>
-                  <div class="col"></div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
-                </div>
-              </form>
-            </div>
-
+    </div>
+      </form>
+     
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Forma de Pago</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-        </div>
-      </div>
-      <div class="d-grid gap-1">
-      <button class="btn w-75 btn-lg btn-primary" type="submit">Finalizar Compra</button>
-    </div>
-    </div>
-
-    </div>
-
+          <div class="modal-body">
+            <form>
+              <div class="form-check m-lg-3">
+                <input class="form-check-input" type="radio" name="paymentMethod" id="creditCardRadio" required>
+                <label class="form-check-label" for="creditCardRadio">
+                  Tarjeta de crédito <i class="bi bi-credit-card"></i>
+                </label>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <label for="creditCardNumber" class="form-label">Número de tarjeta</label>
+                  <input type="text" class="form-control w-75" id="creditCardNumber" aria-describedby="emailHelp"
+                    required>
+                </div>
+                <div class="col">
+                  <label for="securityCode" class="form-label">Código de seguridad</label>
+                  <input type="text" class="form-control w-75" id="securityCode" aria-describedby="emailHelp" required>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <label for="expirationDate" class="form-label">Vencimiento (MM/AA)</label>
+                  <input type="text" class="form-control w-75" id="expirationDate" aria-describedby="emailHelp"
+                    required>
+                </div>
+                <div class="col"></div>
+              </div>
+              <div class="form-check m-lg-3">
+                <input class="form-check-input" type="radio" name="paymentMethod" id="bankTransferRadio">
+                <label class="form-check-label" for="bankTransferRadio">
+                  Transferencia bancaria
+                </label>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col">
+                  <label for="accountNumber" class="form-label">Número de cuenta</label>
+                  <input type="text" class="form-control w-75" id="accountNumber" aria-describedby="emailHelp"
+                    placeholder required>
+                </div>
+                <div class="col"></div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+              </div>
+            </form>
 
   </main>
   <footer class="text-muted">
