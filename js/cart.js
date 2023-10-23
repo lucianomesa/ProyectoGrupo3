@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="col"><img src="${arr.image}" class="img-fluid" alt="${arr.name}" width = 60px></div>
       <div class="col">${arr.name}</div>
       <div class="col d-none d-lg-block d-md-block d-xl-block">${arr.currency} ${arr.unitCost}</div>
-      <div class="col ms-auto"><input type="number" class="form-control form-control-sm m-auto contador" min="1" max="100" value="${arr.count}"> <br></div>
+      <div class="col ms-auto"><input type="number" class="form-control-sm m-auto contador" min="1" max="100" value="${arr.count}"> <br></div>
       <div class="col ms-auto" id="total-${arr.id}">${arr.currency}-${arr.unitCost * arr.count}</div>
       <div class="col ms-auto"><button type = "button" class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i></button> </div>
       `;
