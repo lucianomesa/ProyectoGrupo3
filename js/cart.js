@@ -25,13 +25,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function addProducts(arr) {
     const productContainer = document.createElement("div");
-    productContainer.classList.add("row", "row-cols-5");
+    productContainer.classList.add("row", "row-cols-6");
     productContainer.innerHTML = `
       <div class="col"><img src="${arr.image}" class="img-fluid" alt="${arr.name}" width = 60px></div>
       <div class="col">${arr.name}</div>
       <div class="col d-none d-lg-block d-md-block d-xl-block">${arr.currency} ${arr.unitCost}</div>
       <div class="col ms-auto"><input type="number" class="form-control form-control-sm m-auto contador" min="1" max="100" value="${arr.count}"> <br></div>
-      <div class="col ms-auto" id="total-${arr.id}">${arr.currency}-${arr.unitCost * arr.count}</div>`;
+      <div class="col ms-auto" id="total-${arr.id}">${arr.currency}-${arr.unitCost * arr.count}</div>
+      <div class="col ms-auto"><button type = "button" class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i></button> </div>
+      `;
     products.appendChild(productContainer);
     const contadorInput = productContainer.querySelector(".contador");
     contadorInput.addEventListener("input", function () {
@@ -39,11 +41,8 @@ document.addEventListener("DOMContentLoaded", function () {
       sub_total.innerHTML = `USD-${subTotal(JSON.parse(localStorage.getItem("list")))}`;   
       // Actualizar costSend y totalTotal
       const selectedShippingCost = parseFloat(document.querySelector('input[name="flexRadioDefault"]:checked').value);
-      costSend.innerHTML = `USD-${selectedShippingCost * subTotal(JSON.parse(localStorage.getItem("list")))}`;
-      totalTotal.innerHTML = `USD-${subTotal(JSON.parse(localStorage.getItem("list"))) + selectedShippingCost * subTotal(JSON.parse(localStorage.getItem("list")))}`;
-      if(contadorInput.value = 0){
-        contadorInput.value++;
-      }
+      costSend.innerHTML = `USD-${Math.round((selectedShippingCost * subTotal(JSON.parse(localStorage.getItem("list"))))*100)/100}`;
+      totalTotal.innerHTML = `USD-${Math.round((subTotal(JSON.parse(localStorage.getItem("list"))) + selectedShippingCost * subTotal(JSON.parse(localStorage.getItem("list"))))*100)/100}`;
     });
     //funcion para envitar que la cantidad de producto sea mayor a 0
     var inputs = document.querySelectorAll('input[type=number]');
@@ -88,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   console.log(subTotal(JSON.parse(localStorage.getItem("list"))));
 
-  sub_total.innerHTML = `USD-${Math.round(subTotal(JSON.parse(localStorage.getItem("list"))))}`;
+  sub_total.innerHTML = `USD-${Math.round((subTotal(JSON.parse(localStorage.getItem("list"))))*100)/100}`;
 
 
 
@@ -100,8 +99,8 @@ document.addEventListener("DOMContentLoaded", function () {
     
     radioButton.addEventListener('input', function () {
       // Muestra el valor seleccionado en el elemento con id "valorSeleccionado"
-      costSend.innerHTML = `USD-${radioButton.value * subTotal(JSON.parse(localStorage.getItem("list")))}`;
-      totalTotal.innerHTML = `USD-${subTotal(JSON.parse(localStorage.getItem("list"))) + radioButton.value * subTotal(JSON.parse(localStorage.getItem("list")))}`
+      costSend.innerHTML = `USD-${Math.round((radioButton.value * subTotal(JSON.parse(localStorage.getItem("list"))))*100)/100}`;
+      totalTotal.innerHTML = `USD-${Math.round((subTotal(JSON.parse(localStorage.getItem("list"))) + radioButton.value * subTotal(JSON.parse(localStorage.getItem("list"))))*100)/100}`
     });
   });
 
