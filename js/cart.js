@@ -223,7 +223,7 @@ if (inputTarjeta.checked && (!creditCardNumber.value || !securityCode.value || !
     // Comprobar si se cumplen todas las condiciones antes de enviar el formulario
     todasLasCondicionesCumplidas = (listaDeProductos.length > 0) && (calle.value && numero.value && esquina.value) && (radio15.checked || radio5.checked || radio7.checked) && ((inputTarjeta.checked &&
     creditCardNumber.value && securityCode.value && expirationDate.value) || (inputTraferencia.checked && accountNumber.value));
- 
+
   //Si se cumplen todas las condiciones mostramos una alerta al usuario 
   if (todasLasCondicionesCumplidas) {
     alert("Su compra fue exitosa!");

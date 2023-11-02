@@ -7,6 +7,15 @@ const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 
+
+document.addEventListener("DOMContentLoaded", function(){
+if (!localStorage.datos) {
+  setTimeout(() => {
+    location.href = "login.html";
+  }, 3000);
+};
+})
+
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
 }
@@ -39,6 +48,7 @@ let getJSONData = function(url){
         return result;
     });
 }
+
 
 
 // Agrega el menú desplegable a la barra de navegación
