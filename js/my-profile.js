@@ -8,6 +8,14 @@ const cel = document.getElementById("cel");
 const btn = document.getElementById("btn");
 const data = JSON.parse(localStorage.getItem("datos"));
 const datos2 = JSON.parse(localStorage.getItem("datos2"));
+const imagen = JSON.parse(localStorage.getItem("imagenData"));
+const profileImg = document.getElementById('profileImg');
+const imgInput = document.getElementById('img');
+const img = document.getElementById("user");
+
+if(imagen){
+  img.src = imagen;
+}
 
 if (datos2) {
   name1.value = datos2.name1;
@@ -35,12 +43,13 @@ btn.addEventListener("click", function () {
   if (name1.value && lastName.value && email.value) {
     location.reload();
     }
+  
 });
 
 //Funcion de boostrap para validar formularios
 (function () {
   "use strict";
-  var forms = document.querySelectorAll(".needs-validation");
+  let forms = document.querySelectorAll(".needs-validation");
   Array.prototype.slice.call(forms).forEach(function (form) {
     form.addEventListener(
       "submit",
@@ -55,3 +64,14 @@ btn.addEventListener("click", function () {
     );
   });
 })();
+
+imgInput.addEventListener('input', function() {
+  let reader = new FileReader();
+    reader.onload = function(event) {
+        let imageUrl = event.target.result;
+        img.src = imageUrl;
+        localStorage.setItem('imagenData', JSON.stringify(imageUrl));
+    };
+    reader.readAsDataURL(imgInput.files[0]);
+});
+
