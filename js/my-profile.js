@@ -13,38 +13,6 @@ const profileImg = document.getElementById('profileImg');
 const imgInput = document.getElementById('img');
 const img = document.getElementById("user");
 
-if(imagen){
-  img.src = imagen;
-}
-
-if (datos2) {
-  name1.value = datos2.name1;
-  name2.value = datos2.name2;
-  lastName.value = datos2.lastName;
-  lastName2.value = datos2.lastName2;
-  cel.value = datos2.cel;
-  }
-
-if (data) {
-  email.value = data.email;
-}
-
-btn.addEventListener("click", function () {
-  const datos2 = {
-    name1: name1.value,
-    name2: name2.value,
-    lastName: lastName.value,
-    lastName2: lastName2.value,
-    cel: cel.value,
-  };
-  data.email = email.value;
-  localStorage.setItem("datos", JSON.stringify(data));
-  localStorage.setItem("datos2", JSON.stringify(datos2));
-  if (name1.value && lastName.value && email.value) {
-    location.reload();
-    }
-  
-});
 
 //Funcion de boostrap para validar formularios
 (function () {
@@ -65,6 +33,48 @@ btn.addEventListener("click", function () {
   });
 })();
 
+
+
+//Consicion para saber si el usuario ingreso una imagen 
+if(imagen){
+  img.src = imagen;
+}
+
+//Consicion para saber si el usuario ingreso sus datos anteriormente
+if (datos2) {
+  name1.value = datos2.name1;
+  name2.value = datos2.name2;
+  lastName.value = datos2.lastName;
+  lastName2.value = datos2.lastName2;
+  cel.value = datos2.cel;
+  }
+
+
+if (data) {
+  email.value = data.email;
+}
+
+//Evento click para cargar lo datos que ingrese el usuario en el localStorage
+btn.addEventListener("click", function () {
+  const datos2 = {
+    name1: name1.value,
+    name2: name2.value,
+    lastName: lastName.value,
+    lastName2: lastName2.value,
+    cel: cel.value,
+  };
+  data.email = email.value;
+  localStorage.setItem("datos", JSON.stringify(data));
+  localStorage.setItem("datos2", JSON.stringify(datos2));
+  if (name1.value && lastName.value && email.value) {
+    location.reload();
+    }
+  
+});
+
+
+
+//Evento input para cargar la imagen subida por el usuario y mostrarla en pantalla
 imgInput.addEventListener('input', function() {
   let reader = new FileReader();
     reader.onload = function(event) {
