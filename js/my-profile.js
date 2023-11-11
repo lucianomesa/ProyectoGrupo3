@@ -35,12 +35,12 @@ const img = document.getElementById("user");
 
 
 
-//Consicion para saber si el usuario ingreso una imagen 
+//Condicion para saber si el usuario ingreso una imagen 
 if(imagen){
   img.src = imagen;
 }
 
-//Consicion para saber si el usuario ingreso sus datos anteriormente
+//Condicion para saber si el usuario ingreso sus datos anteriormente
 if (datos2) {
   name1.value = datos2.name1;
   name2.value = datos2.name2;
