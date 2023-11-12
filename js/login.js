@@ -25,10 +25,9 @@ let pw = document.getElementById("password");
 
 btn.addEventListener("click", function (e) {
   e.preventDefault();
-
   const datos = {
     email: email.value,
-    password: pw.value,
+    password: pw.value
   };
 
   localStorage.datos = JSON.stringify(datos);
