@@ -23,51 +23,54 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Funcion para actualizar el subtotal 
   function agregarTotal(val, product) {
-    const tot = document.getElementById(`total-${product.id}`);
-    const newTotal = val * product.unitCost;
-    tot.innerHTML = `${product.currency}-${newTotal}`;
-    const sessionList = JSON.parse(localStorage.getItem("list"));
-    const updatedList = sessionList.map((item) => {
-      if (item.id === product.id) {
+    const tot = document.getElementById(`total-${product.id}`); // Traemos el valor del producto a partir de su ID
+    const newTotal = val * product.unitCost; // Multiplicamos el valor del producto segun la cantidad que se desea comprar
+    tot.innerHTML = `${product.currency}-${newTotal}`; // Agregamos la moneda y precio total para mostrarlo
+    const sessionList = JSON.parse(localStorage.getItem("list")); // Trae la lista que hemos guardado en localStorage
+    const updatedList = sessionList.map((item) => { // Actualizamos la lista
+      if (item.id === product.id) { // Actualiza los subtotales de todos los productos
         item.count = val;
       }
       return item;
     });
-    localStorage.setItem("list", JSON.stringify(updatedList));
+    localStorage.setItem("list", JSON.stringify(updatedList)); // Actualizamos la lista que hemos guardado
   }
 
   // Funcion para calcular el subtotal
   function subTotal(arr) {
     let cont = 0;
     let unSub = 0;
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i].currency === "UYU") {
+    for (let i = 0; i < arr.length; i++) { // Recorre el carrito
+      if (arr[i].currency === "UYU") { // Si el precio esta en pesos, lo divide entre 40 para convertirlo a dolares
         unSub = (parseInt(arr[i].count) * arr[i].unitCost) / 40;
-        cont = cont + unSub;
+        cont = cont + unSub; // Acumula
       } else {
         unSub = parseInt(arr[i].count) * arr[i].unitCost;
         cont = cont + unSub;
       }
     }
-    return cont;
+    return cont; // Retorna el subtotal de todos los productos sumados
   }
 
   // Funcion para actualizar costos de envio y total
   function updateCost(selectedShippingCost){
+    // Para obtener el costo de envio, multiplicamos el subtotal por el porcentaje, segun el envio seleciconado
     costSend.innerHTML = `USD-${Math.round(selectedShippingCost *subTotal(JSON.parse(localStorage.getItem("list"))) * 100) / 100}`;
+    // Suma el subotal mas el costo de envio, lo multiplicamos por 100 y luego lo divimos por 100, para truncarlo al tener dos cifras.
     totalTotal.innerHTML = `USD-${Math.round((subTotal(JSON.parse(localStorage.getItem("list"))) + selectedShippingCost *subTotal(JSON.parse(localStorage.getItem("list")))) *100) / 100}`;
 }
 
   // Evento para actualizar precios segun el tipo de envio
-  var radioButtons = document.querySelectorAll('input[name="flexRadioDefault"]');
-  radioButtons.forEach(function (radioButton) {
+  var radioButtons = document.querySelectorAll('input[name="flexRadioDefault"]'); // Toma el valor segun el input que seleccionamos
+  radioButtons.forEach(function (radioButton) { // Se busca el seleccionado
     radioButton.addEventListener("input", function () {
-      const selectedShippingCost = parseFloat(radioButton.value);
-      updateCost(selectedShippingCost);
+      const selectedShippingCost = parseFloat(radioButton.value); // En el evento input, transformamos el valor a un float
+      updateCost(selectedShippingCost); // Y o pasamos como parametro a la funcion
     });
   });
 
   // Funcion para actualizar el precio al cambiar el valor de los input
+  // Referenciamos todos los input del carrito y agregamos un evento de input que actualiza los valores con los nuevos datos.
   function updateInputs(product, productContainer) {
     const contadorInput = productContainer.querySelector(".contador");
     contadorInput.addEventListener("input", function () {
@@ -79,6 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   //Funcion para borrar productos del carrito
+  // Referencia los inputs y crea un evento de click en el boton de borrar y lo que hacemos es filtrar todo el carrito, a la seccion de elementos que queremos borrar. Luego de esto, actualizamos del localStorage el elemento borrado y volvemos a actualizar los precios.
   function deleteCart(product, productContainer) {
     const btnDelete = productContainer.querySelector(".btnDelete");
     btnDelete.addEventListener("click", function () {
@@ -111,12 +115,13 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Funcion fetch para traer el carrito
+  // Realizamos un fetch a la URL para traer el carrito que guarda esta en la misma. Y consultamos en el localStorage, si anteriormente habiamos guardado un carrito, para tambien mostrarlo en pantalla.
   async function getJsonData(url) {
     const response = await fetch(url);
     const data = await response.json();
     let listCart = JSON.parse(localStorage.getItem("list")) || [];
     const productIdToAdd = data.articles[0].id;
-    const isProductInCart = listCart.some((item) => item.id === productIdToAdd);
+    const isProductInCart = listCart.some((item) => item.id === productIdToAdd); // Some se fija si anteriormente habiamos abierto un carrito, no carga el dato de la URL.
     if (!isProductInCart) {
       listCart.push(data.articles[0]);
       localStorage.setItem("list", JSON.stringify(listCart));
@@ -151,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-//Funcion de boostrap para validar formularios
+// Funcion de boostrap para validar formularios
 (function () {
   "use strict";
   var forms = document.querySelectorAll(".needs-validation");
@@ -170,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 })();
 
-//Evento para saber si se selecciono Tarjeta de credito y mostrarlo en el HTML
+//Evento para saber si se selecciono tarjeta de credito y mostrarlo en el HTML
 inputTarjeta.addEventListener("input", function () {
   if (inputTarjeta.checked) {
     pago.innerHTML = `Tarjeta de Credito  `;
@@ -178,7 +183,7 @@ inputTarjeta.addEventListener("input", function () {
   }
 });
 
-//Evento para saber si se selecciono Cuenta vancaria y mostrarlo en el HTML
+//Evento para saber si se selecciono cuenta bancaria y mostrarlo en el HTML
 inputTraferencia.addEventListener("input", function () {
   if (inputTraferencia.checked) {
     pago.innerHTML = `Tranferencia Bancaria  `;
