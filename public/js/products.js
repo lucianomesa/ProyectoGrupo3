@@ -1,8 +1,6 @@
 //URL que contiene los datos
 const URL =
-  "https://japceibal.github.io/emercado-api/cats_products/" +
-  localStorage.getItem("catID") +
-  ".json";
+PRODUCTS_URL + localStorage.getItem("catID");
 const storedData = JSON.parse(localStorage.datos);
 const listContainer = document.getElementsByClassName("list-container");
 const btnMinMax = document.getElementById("minMax");

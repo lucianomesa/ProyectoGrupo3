@@ -2,21 +2,18 @@
 
 // Url que llama al JSON de los comentarios de cada producto
 const URLCOM =
-  "https://japceibal.github.io/emercado-api/products_comments/" +
-  localStorage.getItem("idProd") +
-  ".json";
+  PRODUCT_INFO_COMMENTS_URL +
+  localStorage.getItem("idProd");
 
 // Url que llama al JSON de las categorias
 const URL =
-  "https://japceibal.github.io/emercado-api/cats_products/" +
-  localStorage.getItem("catID") +
-  ".json";
+PRODUCTS_URL +
+  localStorage.getItem("catID");
 
 //Url de info de productos
 const URLPROD =
-  "https://japceibal.github.io/emercado-api/products/" +
-  localStorage.getItem("idProd") +
-  ".json";
+PRODUCT_INFO_URL +
+  localStorage.getItem("idProd");
 
 const products = document.getElementById("productInfo");
 

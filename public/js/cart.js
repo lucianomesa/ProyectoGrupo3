@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const urlCart = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
+  const urlCart = CART_INFO_URL;
   const products = document.getElementById("cartProduct");
   let sub_total = document.getElementById("subTotal");
   let costSend = document.getElementById("costSend");
