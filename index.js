@@ -1,10 +1,13 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const fs = require('fs');
-const SECRET_KEY = "PASSWORD SUPER HIPER ULTRA RE SECRETA";
+const SECRET_KEY = "PASSWORD SUPER HIPER MEGA ARCHI ULTRA RE SECRETA";
 const app = express();
 const port = 3000;
-
+const fs = require('fs');
+const path = require("path");
+const filePath = path.join(__dirname, "./api/user_cart/25801.json");
+const data = fs.readFileSync(filePath, "utf-8");
+const cartData = JSON.parse(data);
 let cart = require("./api/user_cart/25801.json");
 let cats = require("./api/cats/cat.json");
 
@@ -13,7 +16,7 @@ app.use(express.static("public"));
 
 app.post("/login", (req, res) => {
     const {username, password} = req.body;
-    if(username === "admin" && password === "1234"){
+    if(username === "admin@email.com" && password === "12345678"){
         const token = jwt.sign({username}, SECRET_KEY);
         res.status(200).json({token});
     }
@@ -31,15 +34,20 @@ app.use("/cart", (req, res, next) => {
     catch (error){
         res.status(401).json({ message: "Usuario no autorizado"})
     }
-
-});
-
-app.get("/", (req, res) => {
-    res.send("<h1>Bienvenidas al servidor</h1>");
 });
 
 app.get("/cart", (req, res)=> {
     res.json(cart);
+});
+
+app.post("/cart", (req, res) => {
+    cartData.articles.push(req.body);
+    fs.writeFileSync(filePath, JSON.stringify(cartData), "utf-8");
+    res.status(200).json({message: "El producto fue agregado correctamente!!!"});
+})
+
+app.get("/", (req, res) => {
+    res.send("<h1>Bienvenidas al servidor</h1>");
 });
 
 app.get("/cats", (req, res)=>{
@@ -75,11 +83,10 @@ app.get("/products/:id", (req, res)=> {
 app.get("/products_comments/:prod", (req, res)=>{
     const prod = req.params.prod;
     res.json(require(`./api/products_comments/${parseInt(prod)}`));
-})
-
-
+});
 
 app.listen(port, () => {
     console.log(`Server is running in port http://localhost:${port}`);
 });
+
 

@@ -22,8 +22,9 @@ function showAlertEmailError() {
 let btn = document.getElementById("boton-iniciar-sesion");
 let email = document.getElementById("email");
 let pw = document.getElementById("password");
+const API_LOGIN = "/login";
 
-btn.addEventListener("click", function (e) {
+btn.addEventListener("click", async function (e) {
   e.preventDefault();
   const datos = {
     email: email.value,
@@ -43,5 +44,27 @@ btn.addEventListener("click", function (e) {
     showAlertEmailError();
   } else {
     showAlertError();
+  }
+  try {
+    const data = {
+      username: email.value,
+      password: pw.value
+    };
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    };
+    const response = await fetch(API_LOGIN, fetchOptions);
+    if (!response.ok) {
+      throw new Error(`Error en la solicitud: ${response.status}`);
+    }
+    const responseData = await response.json();
+    const token = responseData.token;
+    sessionStorage.setItem('access-token', token);
+  } catch (error) {
+    alert('Datos ingresados incorrectos');
   }
 });
