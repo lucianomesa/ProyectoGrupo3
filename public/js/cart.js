@@ -53,12 +53,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Funcion para actualizar costos de envio y total
-  function updateCost(selectedShippingCost){
+  function updateCost(selectedShippingCost) {
     // Para obtener el costo de envio, multiplicamos el subtotal por el porcentaje, segun el envio seleciconado
-    costSend.innerHTML = `USD-${Math.round(selectedShippingCost *subTotal(JSON.parse(localStorage.getItem("list"))) * 100) / 100}`;
+    costSend.innerHTML = `USD-${Math.round(selectedShippingCost * subTotal(JSON.parse(localStorage.getItem("list"))) * 100) / 100}`;
     // Suma el subotal mas el costo de envio, lo multiplicamos por 100 y luego lo divimos por 100, para truncarlo al tener dos cifras.
-    totalTotal.innerHTML = `USD-${Math.round((subTotal(JSON.parse(localStorage.getItem("list"))) + selectedShippingCost *subTotal(JSON.parse(localStorage.getItem("list")))) *100) / 100}`;
-}
+    totalTotal.innerHTML = `USD-${Math.round((subTotal(JSON.parse(localStorage.getItem("list"))) + selectedShippingCost * subTotal(JSON.parse(localStorage.getItem("list")))) * 100) / 100}`;
+  }
 
   // Evento para actualizar precios segun el tipo de envio
   var radioButtons = document.querySelectorAll('input[name="flexRadioDefault"]'); // Toma el valor segun el input que seleccionamos
@@ -117,19 +117,38 @@ document.addEventListener("DOMContentLoaded", function () {
   // Funcion fetch para traer el carrito
   // Realizamos un fetch a la URL para traer el carrito que guarda esta en la misma. Y consultamos en el localStorage, si anteriormente habiamos guardado un carrito, para tambien mostrarlo en pantalla.
   async function getJsonData(url) {
-    const response = await fetch(url);
+    const headers = new Headers();
+    // Agrega cualquier encabezado que desees aquí
+    headers.append('access-token', sessionStorage.getItem("access-token")); // Ejemplo de cómo agregar un encabezado de autorización
+
+    const requestOptions = {
+      method: 'GET',
+      headers: headers,
+      redirect: 'follow'
+    };
+
+    const response = await fetch(url, requestOptions);
+
+    if (!response.ok) {
+      // Manejo de errores aquí, por ejemplo:
+      console.error(`Error en la solicitud: ${response.status}`);
+      return;
+    }
+
     const data = await response.json();
     let listCart = JSON.parse(localStorage.getItem("list")) || [];
     const productIdToAdd = data.articles[0].id;
-    const isProductInCart = listCart.some((item) => item.id === productIdToAdd); // Some se fija si anteriormente habiamos abierto un carrito, no carga el dato de la URL.
+    const isProductInCart = listCart.some((item) => item.id === productIdToAdd);
+
     if (!isProductInCart) {
       listCart.push(data.articles[0]);
       localStorage.setItem("list", JSON.stringify(listCart));
     }
-    for (let i = 0; i < listCart.length; i++) {
-      addProducts(listCart[i]);
+    for (let i = 0; i < data.articles.length; i++) {
+      addProducts(data.articles[i]);
     }
-      sub_total.innerHTML = `USD-${Math.round(subTotal(JSON.parse(localStorage.getItem("list"))) * 100) / 100}`;
+
+    sub_total.innerHTML = `USD-${Math.round(subTotal(JSON.parse(localStorage.getItem("list"))) * 100) / 100}`;
   }
 
   getJsonData(urlCart);
@@ -140,83 +159,84 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Agregar eventos de cambio a los botones de radio
   document.getElementById("creditCardRadio").addEventListener("input", function () {
-  // Si se selecciona Tarjeta de crédito habilitar los campos de tarjeta de crédito
+    // Si se selecciona Tarjeta de crédito habilitar los campos de tarjeta de crédito
     creditCardFields.forEach((field) => (field.disabled = !this.checked));
 
-  // Si se selecciona Tarjeta de crédito desactivar los campos de transferencia bancaria
+    // Si se selecciona Tarjeta de crédito desactivar los campos de transferencia bancaria
     bankTransferFields.forEach((field) => (field.disabled = this.checked));
-    });
+  });
 
   document.getElementById("bankTransferRadio").addEventListener("input", function () {
-  // Si se selecciona Transferencia bancaria habilitar los campos de transferencia bancaria
+    // Si se selecciona Transferencia bancaria habilitar los campos de transferencia bancaria
     bankTransferFields.forEach((field) => (field.disabled = !this.checked));
 
-  // Si se selecciona Transferencia bancaria desactivar los campos de tarjeta de crédito
+    // Si se selecciona Transferencia bancaria desactivar los campos de tarjeta de crédito
     creditCardFields.forEach((field) => (field.disabled = this.checked));
-    });
-
-
-// Funcion de boostrap para validar formularios
-(function () {
-  "use strict";
-  var forms = document.querySelectorAll(".needs-validation");
-  Array.prototype.slice.call(forms).forEach(function (form) {
-    form.addEventListener(
-      "submit",
-      function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add("was-validated");
-      },
-      false
-    );
   });
-})();
 
-//Evento para saber si se selecciono tarjeta de credito y mostrarlo en el HTML
-inputTarjeta.addEventListener("input", function () {
-  if (inputTarjeta.checked) {
-    pago.innerHTML = `Tarjeta de Credito  `;
-    alertPago.innerHTML = "";
-  }
-});
 
-//Evento para saber si se selecciono cuenta bancaria y mostrarlo en el HTML
-inputTraferencia.addEventListener("input", function () {
-  if (inputTraferencia.checked) {
-    pago.innerHTML = `Tranferencia Bancaria  `;
-    alertPago.innerHTML = "";
-  }
-});
+  // Funcion de boostrap para validar formularios
+  (function () {
+    "use strict";
+    var forms = document.querySelectorAll(".needs-validation");
+    Array.prototype.slice.call(forms).forEach(function (form) {
+      form.addEventListener(
+        "submit",
+        function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add("was-validated");
+        },
+        false
+      );
+    });
+  })();
 
-//Evento del boton finalizar compra que comprueba que se cumplan las condiciones antes de enviar el formulario
-btnTotal.addEventListener("click", function (e) {
-  const listaDeProductos = JSON.parse(localStorage.getItem("list")); 
+  //Evento para saber si se selecciono tarjeta de credito y mostrarlo en el HTML
+  inputTarjeta.addEventListener("input", function () {
+    if (inputTarjeta.checked) {
+      pago.innerHTML = `Tarjeta de Credito  `;
+      alertPago.innerHTML = "";
+    }
+  });
 
-  if(calle.value && numero.value && esquina.value){
-    e.preventDefault();
-  }
+  //Evento para saber si se selecciono cuenta bancaria y mostrarlo en el HTML
+  inputTraferencia.addEventListener("input", function () {
+    if (inputTraferencia.checked) {
+      pago.innerHTML = `Tranferencia Bancaria  `;
+      alertPago.innerHTML = "";
+    }
+  });
 
-  //Verificamos si el carrito esta vacio
-  if (!listaDeProductos || listaDeProductos.length === 0) {
-    alert("El carrito está vacío");}
+  //Evento del boton finalizar compra que comprueba que se cumplan las condiciones antes de enviar el formulario
+  btnTotal.addEventListener("click", function (e) {
+    const listaDeProductos = JSON.parse(localStorage.getItem("list"));
 
-// Verificamos si se ha seleccionado un método de pago
-if (!inputTarjeta.checked && !inputTraferencia.checked) {
-  alertPago.innerHTML = `Debe seleccionar un método de pago`;
-} else {
-  // Si se ha seleccionado un método de pago borra la advertencia
-  alertPago.innerHTML = "";
-}
+    if (calle.value && numero.value && esquina.value) {
+      e.preventDefault();
+    }
 
-// En caso de seleccionar un método de pago verificamos que se completen los datos correspondientes
-if (inputTarjeta.checked && (!creditCardNumber.value || !securityCode.value || !expirationDate.value)) {
-  alertPago.innerHTML = `Debe completar los datos de la tarjeta de crédito`;
-} else if (inputTraferencia.checked && !accountNumber.value) {
-  alertPago.innerHTML = `Debe completar el número de cuenta para la transferencia`;
-}
+    //Verificamos si el carrito esta vacio
+    if (!listaDeProductos || listaDeProductos.length === 0) {
+      alert("El carrito está vacío");
+    }
+
+    // Verificamos si se ha seleccionado un método de pago
+    if (!inputTarjeta.checked && !inputTraferencia.checked) {
+      alertPago.innerHTML = `Debe seleccionar un método de pago`;
+    } else {
+      // Si se ha seleccionado un método de pago borra la advertencia
+      alertPago.innerHTML = "";
+    }
+
+    // En caso de seleccionar un método de pago verificamos que se completen los datos correspondientes
+    if (inputTarjeta.checked && (!creditCardNumber.value || !securityCode.value || !expirationDate.value)) {
+      alertPago.innerHTML = `Debe completar los datos de la tarjeta de crédito`;
+    } else if (inputTraferencia.checked && !accountNumber.value) {
+      alertPago.innerHTML = `Debe completar el número de cuenta para la transferencia`;
+    }
 
     //Verificamos si se selecciono un metodo de envio
     if (!radio15.checked && !radio5.checked && !radio7.checked) {
@@ -224,15 +244,15 @@ if (inputTarjeta.checked && (!creditCardNumber.value || !securityCode.value || !
     }
     if (radio15.checked || radio5.checked || radio7.checked) {
       noSend.innerHTML = ``;
-    } 
+    }
     // Comprobar si se cumplen todas las condiciones antes de enviar el formulario
     todasLasCondicionesCumplidas = (listaDeProductos.length > 0) && (calle.value && numero.value && esquina.value) && (radio15.checked || radio5.checked || radio7.checked) && ((inputTarjeta.checked &&
-    creditCardNumber.value && securityCode.value && expirationDate.value) || (inputTraferencia.checked && accountNumber.value));
+      creditCardNumber.value && securityCode.value && expirationDate.value) || (inputTraferencia.checked && accountNumber.value));
 
-  //Si se cumplen todas las condiciones mostramos una alerta al usuario 
-  if (todasLasCondicionesCumplidas) {
-    alert("Su compra fue exitosa!");
-    location.reload();
-  }
+    //Si se cumplen todas las condiciones mostramos una alerta al usuario 
+    if (todasLasCondicionesCumplidas) {
+      alert("Su compra fue exitosa!");
+      location.reload();
+    }
   });
 });

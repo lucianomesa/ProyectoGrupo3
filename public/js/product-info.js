@@ -1,5 +1,3 @@
-
-
 // Url que llama al JSON de los comentarios de cada producto
 const URLCOM =
   PRODUCT_INFO_COMMENTS_URL +
@@ -7,12 +5,12 @@ const URLCOM =
 
 // Url que llama al JSON de las categorias
 const URL =
-PRODUCTS_URL +
+  PRODUCTS_URL +
   localStorage.getItem("catID");
 
 //Url de info de productos
 const URLPROD =
-PRODUCT_INFO_URL +
+  PRODUCT_INFO_URL +
   localStorage.getItem("idProd");
 
 const products = document.getElementById("productInfo");
@@ -207,27 +205,42 @@ async function getJsonData(url) {
   const data = await response.json();
   productsInfo(data);
   showRelatedProducts(data);
-
+  console.log(data);
   const btnCart = document.getElementById("cartBtn");
 
   let listCart = JSON.parse(localStorage.getItem("list")) || [];
 
-  btnCart.addEventListener("click", function () {
+  btnCart.addEventListener("click", async function () {
     const objetoEncontrado = listCart.find((item) => item.id === data.id);
     showAlertWarning();
     if (objetoEncontrado) {
       // El objeto existe en listCart, incrementa count para que no se repita el producto
       objetoEncontrado.count++;
     } else {
-      const obj = {
-        id: data.id,
-        name: data.name,
-        count: 1,
-        unitCost: data.cost,
-        currency: data.currency,
-        image: `img/prod${data.id}_1.jpg`,
-      };
-      listCart.push(obj);
+      try {
+        const obj = {
+          id: data.id,
+          name: data.name,
+          count: 1,
+          unitCost: data.cost,
+          currency: data.currency,
+          image: `img/prod${data.id}_1.jpg`,
+        }
+        const fetchOptions = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'access-token': sessionStorage.getItem("access-token")
+          },
+          body: JSON.stringify(obj),
+        };
+        const response = await fetch(CART_INFO_URL, fetchOptions);
+        if (!response.ok) {
+          throw new Error(`Error en la solicitud: ${response.status}`);
+        }
+      } catch (error) {
+        alert('Datos ingresados incorrectos');
+      }
     }
 
     // Guarda el arreglo en el almacenamiento
